@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pick a name</string>
+    <string name="title_activity_splash">Pick a name</string>
 </resources>
