@@ -3,8 +3,10 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.2"
-
+    buildToolsVersion "24.0.0"
+    dataBinding{
+        enabled = true
+    }
     defaultConfig {
         applicationId "fr.android.fmi.pickaname"
         minSdkVersion 15
@@ -22,37 +24,33 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(path: ':core')
+    compile project(path: ':repositories')
 
     // Android
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
-
-    // Dagger
-    apt 'com.google.dagger:dagger-compiler:2.5'
-    compile 'com.google.dagger:dagger:2.5'
-    provided 'javax.annotation:jsr250-api:1.0'
-
-    // Butterknife
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    // Utils
-    compile 'org.apache.commons:commons-lang3:3.4'
 
     // Test
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.1.0-RC.1'
     testCompile 'de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1'
     testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile ('com.squareup.assertj:assertj-android:1.1.1') {
-        exclude module: 'support-annotations'
-    }
     testCompile 'org.robolectric:robolectric:3.1.2'
     testCompile 'org.robolectric:shadows-support-v4:3.1.2'
-    testCompile 'org.reflections:reflections:0.9.10'
-    testCompile('junit-addons:junit-addons:1.4')
 }
