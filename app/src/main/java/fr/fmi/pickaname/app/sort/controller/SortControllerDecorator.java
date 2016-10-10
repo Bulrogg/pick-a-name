@@ -8,18 +8,19 @@ public class SortControllerDecorator implements SortController {
 
     private final Executor executor;
 
-    public SortControllerDecorator(SortController controller, Executor executor) {
+    public SortControllerDecorator(final SortController controller, final Executor executor) {
         this.controller = controller;
         this.executor = executor;
     }
 
     @Override
-    public void executeRequest(final String name, final String password) {
+    public void loadFirstNames() {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                controller.executeRequest(name, password);
+                controller.loadFirstNames();
             }
         });
     }
+
 }

@@ -4,18 +4,17 @@ import android.support.annotation.StringRes;
 
 public class SortViewModel {
 
-    public static final int DISPLAY_FORM = 0;
-    public static final int DISPLAY_LOADING = 1;
-    public static final int DISPLAY_SUCCESS = 2;
+    public static final int VF_SORT_LOADING = 0;
+    public static final int VF_SORT_SUCCESS = 1;
+    public static final int VF_SORT_ERROR = 2;
 
     public int displayedChild;
 
     public boolean shouldHideKeyboard;
 
-    public String title;
-
-    public String description;
-
     @StringRes
     public int errorResId;
+
+    public String firstName;
+
 }

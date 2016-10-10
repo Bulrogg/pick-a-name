@@ -1,17 +1,18 @@
 package fr.fmi.pickaname.app.sort.controller;
 
-import fr.fmi.pickaname.core.login.LoginInteractor;
-import fr.fmi.pickaname.core.login.LoginRequest;
+import fr.fmi.pickaname.core.sort.SortInteractor;
 
 public class SortControllerImpl implements SortController {
-    private final LoginInteractor interactor;
 
-    public SortControllerImpl(LoginInteractor interactor) {
+    private final SortInteractor interactor;
+
+    public SortControllerImpl(final SortInteractor interactor) {
         this.interactor = interactor;
     }
 
     @Override
-    public void executeRequest(String name, String password) {
-        interactor.login(new LoginRequest(name, password));
+    public void loadFirstNames() {
+        interactor.loadFirstNames();
     }
+
 }

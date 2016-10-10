@@ -11,7 +11,6 @@ dependencies {
     apt "com.google.auto.value:auto-value:1.2"
     compile "com.google.auto.value:auto-value:1.2"
 
-    // TODO passer a GSON
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.3'

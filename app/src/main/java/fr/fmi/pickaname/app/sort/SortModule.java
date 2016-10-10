@@ -8,11 +8,11 @@ import fr.fmi.pickaname.app.sort.controller.SortControllerDecorator;
 import fr.fmi.pickaname.app.sort.controller.SortControllerImpl;
 import fr.fmi.pickaname.app.sort.presentation.SortPresenterImpl;
 import fr.fmi.pickaname.app.sort.presentation.SortView;
-import fr.fmi.pickaname.core.login.LoginInteractor;
-import fr.fmi.pickaname.core.login.LoginPresenter;
-import fr.fmi.pickaname.core.login.LoginRepository;
-import fr.fmi.pickaname.repositories.login.FakeLoginRepository;
-import fr.fmi.pickaname.repositories.login.SimulateDelayLoginRepository;
+import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
+import fr.fmi.pickaname.core.sort.SortInteractor;
+import fr.fmi.pickaname.core.sort.SortPresenter;
+import fr.fmi.pickaname.repositories.firstname.GetFirstNamesRepositoryImpl;
+
 
 public class SortModule {
 
@@ -25,18 +25,21 @@ public class SortModule {
     }
 
     public SortController getController() {
-        final LoginInteractor interactor = new LoginInteractor(getRepository(), getPresenter());
+        final SortInteractor interactor = new SortInteractor(getPresenter(),
+                                                             getFirstNamesRepository());
         final SortControllerImpl controller = new SortControllerImpl(interactor);
         return new SortControllerDecorator(controller, applicationModule.getAsyncExecutor());
     }
 
-    private LoginRepository getRepository() {
-        final ObjectMapper objectMapper = applicationModule.getMapperModule().getObjectMapper();
-        final FakeLoginRepository repository = new FakeLoginRepository(objectMapper);
-        return new SimulateDelayLoginRepository(repository);
+    private GetFirstNamesRepository getFirstNamesRepository() {
+        return new GetFirstNamesRepositoryImpl(getObjectMapper());
     }
 
-    private LoginPresenter getPresenter(){
+    private SortPresenter getPresenter() {
         return new SortPresenterImpl(view, applicationModule.getContext());
+    }
+
+    private ObjectMapper getObjectMapper() {
+        return applicationModule.getMapperModule().getObjectMapper();
     }
 }
