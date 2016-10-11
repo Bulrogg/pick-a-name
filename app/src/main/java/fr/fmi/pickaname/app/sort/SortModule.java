@@ -27,7 +27,7 @@ public class SortModule {
     public SortController getController() {
         final SortInteractor interactor = new SortInteractor(getPresenter(),
                                                              getFirstNamesRepository());
-        final SortControllerImpl controller = new SortControllerImpl(interactor);
+        final SortController controller = new SortControllerImpl(interactor);
         return new SortControllerDecorator(controller, applicationModule.getAsyncExecutor());
     }
 
