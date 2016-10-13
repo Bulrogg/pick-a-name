@@ -24,7 +24,7 @@ public abstract class JsonConfiguration implements Configuration {
 
     @SuppressWarnings("unused")
     @AutoValue.Builder
-    abstract static class Builder {
+    public abstract static class Builder {
 
         @JsonProperty("last-name")
         public abstract Builder setLastName(String lastName);

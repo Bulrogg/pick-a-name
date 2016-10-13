@@ -8,7 +8,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "fr.android.fmi.pickaname"
+        applicationId "fr.fmi.pickaname"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1

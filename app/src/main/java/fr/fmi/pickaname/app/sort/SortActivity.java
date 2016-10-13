@@ -4,8 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import fr.android.fmi.pickaname.R;
-import fr.android.fmi.pickaname.databinding.ActivitySortBinding;
+import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.databinding.ActivitySortBinding;
 import fr.fmi.pickaname.app.sort.controller.SortController;
 import fr.fmi.pickaname.app.sort.presentation.SortView;
 import fr.fmi.pickaname.app.sort.presentation.SortViewModel;

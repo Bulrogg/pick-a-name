@@ -4,8 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import fr.android.fmi.pickaname.R;
-import fr.android.fmi.pickaname.databinding.ActivitySettingsBinding;
+import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.databinding.ActivitySettingsBinding;
 import fr.fmi.pickaname.app.settings.controller.SettingsController;
 import fr.fmi.pickaname.app.settings.presentation.SettingsView;
 import fr.fmi.pickaname.app.settings.presentation.SettingsViewModel;
