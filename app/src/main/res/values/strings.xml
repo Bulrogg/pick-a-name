@@ -7,4 +7,21 @@
     <string name="activity_settings_loading_error">Oups, une erreur est survenue lors de la récupération de votre configuration</string>
     <string name="activity_settings_title">Configuration</string>
 
+    <string name="action_settings">Settings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_header_title">Pick A Name</string>
+    <string name="nav_header_subtitle">A vous de choisir un prénom</string>
+    <string name="nav_sorting">Trier</string>
+    <string name="nav_accepted">Retenus</string>
+    <string name="nav_refused">Refusés</string>
+    <string name="nav_sorting_title">Les prénoms</string>
+    <string name="nav_application">Application</string>
+    <string name="nav_settings">Configuration</string>
+    <string name="nav_reinitialisation">Réinitialisation</string>
+    <string name="nav_about">A propos</string>
+    <string name="nav_stars">Noter l\'app</string>
+
 </resources>

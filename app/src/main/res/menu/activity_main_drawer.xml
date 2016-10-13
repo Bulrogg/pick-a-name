@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/nav_sorting_title">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_sorting"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_sorting"/>
+            <item
+                android:id="@+id/nav_accepted"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_accepted"/>
+            <item
+                android:id="@+id/nav_refused"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_refused"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_application">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_configuration"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_settings"/>
+            <item
+                android:id="@+id/nav_reinitialisation"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_reinitialisation"/>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="@string/nav_about"/>
+    <item
+        android:id="@+id/nav_stars"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="@string/nav_stars"/>
+
+</menu>
