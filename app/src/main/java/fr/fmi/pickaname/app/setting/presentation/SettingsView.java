@@ -1,4 +1,4 @@
-package fr.fmi.pickaname.app.settings.presentation;
+package fr.fmi.pickaname.app.setting.presentation;
 
 public interface SettingsView {
 

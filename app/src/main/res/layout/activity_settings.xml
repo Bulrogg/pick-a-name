@@ -7,11 +7,11 @@
 
         <variable
             name="controller"
-            type="fr.fmi.pickaname.app.settings.controller.SettingsController"/>
+            type="fr.fmi.pickaname.app.setting.controller.SettingsController"/>
 
         <variable
             name="viewModel"
-            type="fr.fmi.pickaname.app.settings.presentation.SettingsViewModel"/>
+            type="fr.fmi.pickaname.app.setting.presentation.SettingsViewModel"/>
     </data>
 
     <ViewFlipper

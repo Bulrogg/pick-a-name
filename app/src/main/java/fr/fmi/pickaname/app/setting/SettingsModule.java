@@ -1,13 +1,13 @@
-package fr.fmi.pickaname.app.settings;
+package fr.fmi.pickaname.app.setting;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.fmi.pickaname.app.ApplicationModule;
-import fr.fmi.pickaname.app.settings.controller.SettingsController;
-import fr.fmi.pickaname.app.settings.controller.SettingsControllerDecorator;
-import fr.fmi.pickaname.app.settings.controller.SettingsControllerImpl;
-import fr.fmi.pickaname.app.settings.presentation.SettingsPresenterImpl;
-import fr.fmi.pickaname.app.settings.presentation.SettingsView;
+import fr.fmi.pickaname.app.setting.controller.SettingsController;
+import fr.fmi.pickaname.app.setting.controller.SettingsControllerDecorator;
+import fr.fmi.pickaname.app.setting.controller.SettingsControllerImpl;
+import fr.fmi.pickaname.app.setting.presentation.SettingsPresenterImpl;
+import fr.fmi.pickaname.app.setting.presentation.SettingsView;
 import fr.fmi.pickaname.core.settings.SettingsPresenter;
 
 
