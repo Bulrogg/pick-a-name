@@ -18,7 +18,7 @@ import fr.fmi.pickaname.app.about.AboutFragment;
 import fr.fmi.pickaname.app.accepted.AcceptedFragment;
 import fr.fmi.pickaname.app.feedback.FeedbackFragment;
 import fr.fmi.pickaname.app.rejected.RejectedFragment;
-import fr.fmi.pickaname.app.setting.SettingFragment;
+import fr.fmi.pickaname.app.settings.SettingsFragment;
 import fr.fmi.pickaname.app.sort.SortFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 loadMainFragment(RejectedFragment.newInstance());
                 break;
             case R.id.nav_configuration:
-                loadMainFragment(SettingFragment.newInstance());
+                loadMainFragment(SettingsFragment.newInstance());
                 break;
             case R.id.nav_about:
                 loadMainFragment(AboutFragment.newInstance());

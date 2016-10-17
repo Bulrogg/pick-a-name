@@ -1,5 +1,10 @@
 package fr.fmi.pickaname.app.feedback;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.app.AbstractMainFragment;
 
@@ -7,6 +12,13 @@ public class FeedbackFragment extends AbstractMainFragment {
 
     public static FeedbackFragment newInstance() {
         return new FeedbackFragment();
+    }
+
+    public View onCreateView(
+            final LayoutInflater inflater,
+            final ViewGroup container,
+            final Bundle savedInstanceState) {
+        return inflater.inflate(getLayoutId(), container, false);
     }
 
     @Override public int getTitleId() {

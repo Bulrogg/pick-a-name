@@ -3,15 +3,22 @@ package fr.fmi.pickaname.repositories.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.entities.Configuration;
-import fr.fmi.pickaname.core.entities.FirstName;
+import fr.fmi.pickaname.core.entities.Settings;
+import fr.fmi.pickaname.core.entities.Sorting;
 import fr.fmi.pickaname.core.exception.TechnicalException;
+import fr.fmi.pickaname.model.JsonConfiguration;
+import fr.fmi.pickaname.model.JsonSettings;
+import fr.fmi.pickaname.model.JsonSorting;
 
-// TODO ooo gérer un cache
+import static fr.fmi.pickaname.core.entities.Settings.ResearchType.BOTH;
+
 public class ConfigurationRepositoryImpl implements ConfigurationRepository {
+
+    // TODO ooo put in SharedPreference
+    private static Configuration configuration;
 
     private final ObjectMapper mapper;
 
@@ -19,25 +26,30 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
         this.mapper = mapper;
     }
 
-    @Override public Configuration getUserConfiguration() throws TechnicalException {
-        // TODO rechercher depuis les preferences storages
+    @Override
+    public Settings getSettings() throws TechnicalException {
+        return getConfiguration().getSettings();
+    }
 
-        return new Configuration() {
-            @Override public String getLastName() {
-                return "Last name";
-            }
+    @Override
+    public Sorting getSorting() throws TechnicalException {
+        return getConfiguration().getSorting();
+    }
 
-            @Override public ResearchType getResearchType() {
-                return ResearchType.BOY;
-            }
-
-            @Override public List<FirstName> getFirstNameAccepted() {
-                return new ArrayList<>();
-            }
-
-            @Override public List<FirstName> getFirstNameRejected() {
-                return new ArrayList<>();
-            }
-        };
+    private Configuration getConfiguration() {
+        if (configuration == null) {
+            configuration = JsonConfiguration.builder()
+                    .setSettings(JsonSettings.builder()
+                            .setLastName("Default-lastname")
+                            .setResearchType(BOTH)
+                            .build()
+                    )
+                    .setSorting(JsonSorting.builder()
+                            .setAccepted(new ArrayList<String>())
+                            .setRejected(new ArrayList<String>())
+                            .build()
+                    ).build();
+        }
+        return configuration;
     }
 }

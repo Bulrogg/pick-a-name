@@ -1,4 +1,4 @@
-package fr.fmi.pickaname.app.setting.controller;
+package fr.fmi.pickaname.app.settings.controller;
 
 import java.util.concurrent.Executor;
 

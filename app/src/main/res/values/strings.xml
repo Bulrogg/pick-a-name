@@ -4,15 +4,16 @@
 
     <string name="activity_sort_title">Sort</string>
 
-    <string name="activity_settings_loading_error">Oups, une erreur est survenue lors de la récupération de votre configuration</string>
-    <string name="activity_settings_title">Configuration</string>
-
+    <string name="fragment_setting_title">Configuration</string>
+    <string name="fragment_settings_loading_error">Oups, une erreur est survenue lors de la récupération de votre configuration</string>
+    <string name="fragment_settings_gender_both">Garçon ou fille</string>
+    <string name="fragment_settings_gender_girl">Fille</string>
+    <string name="fragment_settings_gender_boy">Garçon</string>
 
     <string name="fragment_about_title">A propos</string>
     <string name="fragment_sort_title">Trier</string>
     <string name="fragment_accepted_title">Prénoms retenus</string>
     <string name="fragment_rejected_title">Prénoms rejetés</string>
-    <string name="fragment_setting_title">Configuration</string>
     <string name="fragment_feedback_title">Feedback</string>
 
     <string name="action_settings">Settings</string>

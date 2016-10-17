@@ -24,10 +24,6 @@
             android:label="@string/activity_sort_title">
         </activity>
 
-        <activity
-            android:name=".app.setting.SettingsActivity"
-            android:label="@string/activity_settings_title"/>
-
     </application>
 
 </manifest>
