@@ -21,7 +21,7 @@
 
         <activity
             android:name=".app.sort.SortActivity"
-            android:label="@string/activity_sort_title">
+            android:label="@string/fragment_sort_title">
         </activity>
 
     </application>

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.entities.Configuration;
 import fr.fmi.pickaname.core.entities.Settings;
+import fr.fmi.pickaname.core.entities.Settings.ResearchType;
 import fr.fmi.pickaname.core.entities.Sorting;
 import fr.fmi.pickaname.core.exception.TechnicalException;
 import fr.fmi.pickaname.model.JsonConfiguration;
@@ -36,19 +37,34 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
         return getConfiguration().getSorting();
     }
 
+    @Override
+    public Configuration saveSettings(
+            final ResearchType researchType,
+            final String lastName
+    ) throws TechnicalException {
+        configuration = JsonConfiguration.copy(getConfiguration())
+                                         .setSettings(JsonSettings.builder()
+                                                                  .setLastName(lastName)
+                                                                  .setResearchType(researchType)
+                                                                  .build())
+                                         .build();
+        return configuration;
+    }
+
     private Configuration getConfiguration() {
         if (configuration == null) {
             configuration = JsonConfiguration.builder()
-                    .setSettings(JsonSettings.builder()
-                            .setLastName("Default-lastname")
-                            .setResearchType(BOTH)
-                            .build()
-                    )
-                    .setSorting(JsonSorting.builder()
-                            .setAccepted(new ArrayList<String>())
-                            .setRejected(new ArrayList<String>())
-                            .build()
-                    ).build();
+                                             .setSettings(JsonSettings.builder()
+                                                                      .setLastName(
+                                                                              "Default-lastname")
+                                                                      .setResearchType(BOTH)
+                                                                      .build()
+                                             )
+                                             .setSorting(JsonSorting.builder()
+                                                                    .setAccepted(new ArrayList<String>())
+                                                                    .setRejected(new ArrayList<String>())
+                                                                    .build()
+                                             ).build();
         }
         return configuration;
     }

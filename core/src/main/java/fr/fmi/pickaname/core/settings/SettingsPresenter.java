@@ -6,8 +6,12 @@ public interface SettingsPresenter {
 
     void presentLoading();
 
-
     void presentSettings(Settings settings);
 
     void presentLoadingFailure();
+
+    void presentSaveSettingsSuccess();
+
+    void presentSaveSettingsFailure();
+
 }

@@ -23,6 +23,8 @@ import fr.fmi.pickaname.app.sort.SortFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    // TODO ooo utiliser le data binding et supprimer butterknife
+
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initToggle() {
         setSupportActionBar(toolbar);
-        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
     }

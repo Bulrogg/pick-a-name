@@ -28,4 +28,12 @@ public class SettingsInteractor {
         }
     }
 
+    public void saveSettings(final Settings.ResearchType researchType, final String lastName) {
+        try {
+            configurationRepository.saveSettings(researchType, lastName);
+            presenter.presentSaveSettingsSuccess();
+        } catch (TechnicalException e) {
+            presenter.presentSaveSettingsFailure();
+        }
+    }
 }

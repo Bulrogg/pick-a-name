@@ -16,6 +16,12 @@ public abstract class JsonConfiguration implements Configuration {
         return new AutoValue_JsonConfiguration.Builder();
     }
 
+    public static Builder copy(final Configuration source) {
+        return builder()
+                .setSettings(source.getSettings())
+                .setSorting(source.getSorting());
+    }
+
     public abstract Settings getSettings();
 
     public abstract Sorting getSorting();

@@ -28,7 +28,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
         final SettingsViewModel viewModel = getViewModel();
         viewModel.displayedChild = SettingsViewModel.VF_SUCCESS;
         viewModel.lastName = settings.getLastName();
-        viewModel.gender = getGenderToDisplay(settings.getResearchType());
+        viewModel.researchType = settings.getResearchType().name();
         view.displayViewModel(viewModel);
     }
 
@@ -36,26 +36,20 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     public void presentLoadingFailure() {
         final SettingsViewModel viewModel = getViewModel();
         viewModel.displayedChild = SettingsViewModel.VF_ERROR;
-        viewModel.errorResId = R.string.fragment_settings_loading_error;
         view.displayViewModel(viewModel);
+    }
+
+    @Override
+    public void presentSaveSettingsSuccess() {
+        view.displayToast(R.string.fragment_settings_save_success);
+    }
+
+    @Override
+    public void presentSaveSettingsFailure() {
+        view.displayToast(R.string.fragment_settings_save_failure);
     }
 
     private SettingsViewModel getViewModel() {
         return new SettingsViewModel();
-    }
-
-    private String getGenderToDisplay(final Settings.ResearchType type) {
-        int resId;
-        switch (type) {
-            case GIRL:
-                resId = R.string.fragment_settings_gender_girl;
-                break;
-            case BOY:
-                resId = R.string.fragment_settings_gender_boy;
-                break;
-            default:
-                resId = R.string.fragment_settings_gender_both;
-        }
-        return context.getString(resId);
     }
 }

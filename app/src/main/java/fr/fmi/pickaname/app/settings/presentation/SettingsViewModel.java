@@ -1,8 +1,8 @@
 package fr.fmi.pickaname.app.settings.presentation;
 
-import android.support.annotation.StringRes;
+import android.databinding.BaseObservable;
 
-public class SettingsViewModel {
+public class SettingsViewModel extends BaseObservable {
 
     public static final int VF_LOADING = 0;
     public static final int VF_SUCCESS = 1;
@@ -10,10 +10,7 @@ public class SettingsViewModel {
 
     public int displayedChild;
 
-    @StringRes
-    public int errorResId;
-
     public String lastName;
 
-    public String gender;
+    public String researchType;
 }

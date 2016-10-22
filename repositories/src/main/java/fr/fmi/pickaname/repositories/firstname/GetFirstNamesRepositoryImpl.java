@@ -25,7 +25,7 @@ public class GetFirstNamesRepositoryImpl implements GetFirstNamesRepository {
     @Override
     public List<FirstName> getFirstNames() throws TechnicalException {
         try {
-            final URL resource = getClass().getResource("/first-names.json");
+            final URL resource =  getClass().getResource("/first-names.json");
             final ArrayList<FirstName> firstNames = new ArrayList<>();
             firstNames.addAll(Arrays.asList(mapper.readValue(resource, JsonFirstName[].class)));
             return firstNames;
