@@ -8,11 +8,10 @@ import org.junit.Test;
 import java.io.IOException;
 
 import fr.fmi.pickaname.MapperModule;
-import fr.fmi.pickaname.core.entities.FirstName;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JsonFirstNameTest {
+public class JsonSortingTest {
 
     private ObjectMapper mapper;
 
@@ -24,14 +23,14 @@ public class JsonFirstNameTest {
     @Test
     public void deserialization() throws IOException {
         // Given
-        final String json = "{ \"first-name\" : \"Frédéric\", \"gender\" : \"MALE\" }";
+        final String json = "{ \"accepted\": [\"aA\", \"aB\"], \"rejected\": [\"rA\", \"rB\"] }";
 
         // When
-        final JsonFirstName obj = mapper.readValue(json, JsonFirstName.class);
+        final JsonSorting obj = mapper.readValue(json, JsonSorting.class);
 
         // Then
-        assertThat(obj.getFirstName()).isEqualTo("Frédéric");
-        assertThat(obj.getGender()).isEqualTo(FirstName.Gender.MALE);
+        assertThat(obj.getAccepted()).containsExactly("aA", "aB");
+        assertThat(obj.getRejected()).containsExactly("rA", "rB");
     }
 
 }

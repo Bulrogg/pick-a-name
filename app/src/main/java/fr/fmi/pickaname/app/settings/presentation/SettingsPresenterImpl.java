@@ -24,7 +24,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     }
 
     @Override
-    public void presentSettings(Settings settings) {
+    public void presentSettings(final Settings settings) {
         final SettingsViewModel viewModel = getViewModel();
         viewModel.displayedChild = SettingsViewModel.VF_SUCCESS;
         viewModel.lastName = settings.getLastName();

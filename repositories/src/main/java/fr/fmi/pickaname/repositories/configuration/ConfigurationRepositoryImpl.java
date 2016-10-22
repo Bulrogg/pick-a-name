@@ -38,7 +38,7 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
     }
 
     @Override
-    public Configuration saveSettings(
+    public Settings saveSettings(
             final ResearchType researchType,
             final String lastName
     ) throws TechnicalException {
@@ -48,10 +48,10 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
                                                                   .setResearchType(researchType)
                                                                   .build())
                                          .build();
-        return configuration;
+        return configuration.getSettings();
     }
 
-    private Configuration getConfiguration() {
+    Configuration getConfiguration() {
         if (configuration == null) {
             configuration = JsonConfiguration.builder()
                                              .setSettings(JsonSettings.builder()

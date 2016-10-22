@@ -1,6 +1,5 @@
 package fr.fmi.pickaname.core.configuration;
 
-import fr.fmi.pickaname.core.entities.Configuration;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.entities.Settings.ResearchType;
 import fr.fmi.pickaname.core.entities.Sorting;
@@ -12,5 +11,5 @@ public interface ConfigurationRepository {
 
     Sorting getSorting() throws TechnicalException;
 
-    Configuration saveSettings(ResearchType researchType, String lastName) throws TechnicalException;
+    Settings saveSettings(ResearchType researchType, String lastName) throws TechnicalException;
 }

@@ -21,14 +21,14 @@ public class DataBindingHelper {
     }
 
     @BindingAdapter("bind:displayedChild")
-    public static void setDisplayedChild(ViewFlipper viewFlipper, int whichChild) {
+    public static void setDisplayedChild(final ViewFlipper viewFlipper, final int whichChild) {
         if (viewFlipper.getDisplayedChild() != whichChild) {
             viewFlipper.setDisplayedChild(whichChild);
         }
     }
 
     @BindingAdapter("bind:shouldHideKeyboard")
-    public static void shouldHideKeyboard(View view, boolean shouldHideKeyboard) {
+    public static void shouldHideKeyboard(final View view, final boolean shouldHideKeyboard) {
         if (shouldHideKeyboard) {
             InputMethodManager imm = (InputMethodManager) view.getContext()
                                                               .getSystemService(INPUT_METHOD_SERVICE);
@@ -37,14 +37,14 @@ public class DataBindingHelper {
     }
 
     @BindingAdapter("bind:toast")
-    public static void toast(View view, @StringRes int resId) {
+    public static void toast(final View view, @StringRes final int resId) {
         if (resId != 0) {
             Toast.makeText(view.getContext(), resId, Toast.LENGTH_SHORT).show();
         }
     }
 
     @BindingAdapter("bind:toast")
-    public static void toast(View view, String message) {
+    public static void toast(final View view, final String message) {
         if (message != null) {
             Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
         }
@@ -76,7 +76,7 @@ public class DataBindingHelper {
     }
 
     @InverseBindingAdapter(attribute = "bind:selectedValue", event = "bind:selectedValueAttrChanged")
-    public static String captureSelectedValue(Spinner spinner) {
+    public static String captureSelectedValue(final Spinner spinner) {
         return (String) spinner.getSelectedItem();
     }
 }
