@@ -1,17 +1,14 @@
 package fr.fmi.pickaname.app.main;
 
 import android.app.FragmentManager;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.app.AbstractMainFragment;
 import fr.fmi.pickaname.app.about.AboutFragment;
@@ -20,28 +17,26 @@ import fr.fmi.pickaname.app.feedback.FeedbackFragment;
 import fr.fmi.pickaname.app.rejected.RejectedFragment;
 import fr.fmi.pickaname.app.settings.SettingsFragment;
 import fr.fmi.pickaname.app.sort.SortFragment;
+import fr.fmi.pickaname.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    // TODO ooo utiliser le data binding et supprimer butterknife
-
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.drawer_layout) DrawerLayout drawer;
-    @BindView(R.id.nav_view) NavigationView navigationView;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         initToggle();
-        navigationView.setNavigationItemSelectedListener(this);
+        binding.navigation.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+            binding.drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 loadMainFragment(FeedbackFragment.newInstance());
                 break;
         }
-        drawer.closeDrawer(GravityCompat.START);
+        binding.drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -81,9 +76,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initToggle() {
-        setSupportActionBar(toolbar);
-        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
-        drawer.setDrawerListener(toggle);
+        setSupportActionBar(binding.toolbar);
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                                                                       binding.drawer,
+                                                                       binding.toolbar,
+                                                                       R.string.nav_drawer_open,
+                                                                       R.string.nav_drawer_close);
+        binding.drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
 }
