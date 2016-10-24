@@ -1,12 +1,12 @@
-package fr.fmi.pickaname.app.sort.controller;
+package fr.fmi.pickaname.app.sorting.controller;
 
 import fr.fmi.pickaname.core.sort.SortInteractor;
 
-public class SortControllerImpl implements SortController {
+public class SortingControllerImpl implements SortingController {
 
     private final SortInteractor interactor;
 
-    public SortControllerImpl(final SortInteractor interactor) {
+    public SortingControllerImpl(final SortInteractor interactor) {
         this.interactor = interactor;
     }
 

@@ -16,7 +16,7 @@ import fr.fmi.pickaname.app.accepted.AcceptedFragment;
 import fr.fmi.pickaname.app.feedback.FeedbackFragment;
 import fr.fmi.pickaname.app.rejected.RejectedFragment;
 import fr.fmi.pickaname.app.settings.SettingsFragment;
-import fr.fmi.pickaname.app.sort.SortFragment;
+import fr.fmi.pickaname.app.sorting.SortingFragment;
 import fr.fmi.pickaname.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         final int navId = item.getItemId();
         switch (navId) {
             case R.id.nav_sorting:
-                loadMainFragment(SortFragment.newInstance());
+                loadMainFragment(SortingFragment.newInstance());
                 break;
             case R.id.nav_accepted:
                 loadMainFragment(AcceptedFragment.newInstance());

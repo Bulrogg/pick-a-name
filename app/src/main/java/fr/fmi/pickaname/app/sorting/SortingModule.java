@@ -1,34 +1,34 @@
-package fr.fmi.pickaname.app.sort;
+package fr.fmi.pickaname.app.sorting;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.fmi.pickaname.app.ApplicationModule;
-import fr.fmi.pickaname.app.sort.controller.SortController;
-import fr.fmi.pickaname.app.sort.controller.SortControllerDecorator;
-import fr.fmi.pickaname.app.sort.controller.SortControllerImpl;
-import fr.fmi.pickaname.app.sort.presentation.SortPresenterImpl;
-import fr.fmi.pickaname.app.sort.presentation.SortView;
+import fr.fmi.pickaname.app.sorting.controller.SortingController;
+import fr.fmi.pickaname.app.sorting.controller.SortingControllerDecorator;
+import fr.fmi.pickaname.app.sorting.controller.SortingControllerImpl;
+import fr.fmi.pickaname.app.sorting.presentation.SortingPresenterImpl;
+import fr.fmi.pickaname.app.sorting.presentation.SortingView;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 import fr.fmi.pickaname.core.sort.SortInteractor;
 import fr.fmi.pickaname.core.sort.SortPresenter;
 import fr.fmi.pickaname.repositories.firstname.GetFirstNamesRepositoryImpl;
 
 
-public class SortModule {
+public class SortingModule {
 
     private final ApplicationModule applicationModule;
-    private final SortView view;
+    private final SortingView view;
 
-    public SortModule(final ApplicationModule applicationModule, final SortView view) {
+    public SortingModule(final ApplicationModule applicationModule, final SortingView view) {
         this.applicationModule = applicationModule;
         this.view = view;
     }
 
-    public SortController getController() {
+    public SortingController getController() {
         final SortInteractor interactor = new SortInteractor(getPresenter(),
                                                              getFirstNamesRepository());
-        final SortController controller = new SortControllerImpl(interactor);
-        return new SortControllerDecorator(controller, applicationModule.getAsyncExecutor());
+        final SortingController controller = new SortingControllerImpl(interactor);
+        return new SortingControllerDecorator(controller, applicationModule.getAsyncExecutor());
     }
 
     private GetFirstNamesRepository getFirstNamesRepository() {
@@ -36,7 +36,7 @@ public class SortModule {
     }
 
     private SortPresenter getPresenter() {
-        return new SortPresenterImpl(view, applicationModule.getContext());
+        return new SortingPresenterImpl(view, applicationModule.getContext());
     }
 
     private ObjectMapper getObjectMapper() {

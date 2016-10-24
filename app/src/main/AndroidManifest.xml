@@ -19,11 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".app.sort.SortActivity"
-            android:label="@string/fragment_sort_title">
-        </activity>
-
     </application>
 
 </manifest>

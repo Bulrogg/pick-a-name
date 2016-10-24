@@ -1,14 +1,14 @@
-package fr.fmi.pickaname.app.sort.controller;
+package fr.fmi.pickaname.app.sorting.controller;
 
 import java.util.concurrent.Executor;
 
-public class SortControllerDecorator implements SortController {
+public class SortingControllerDecorator implements SortingController {
 
-    private final SortController controller;
+    private final SortingController controller;
 
     private final Executor executor;
 
-    public SortControllerDecorator(final SortController controller, final Executor executor) {
+    public SortingControllerDecorator(final SortingController controller, final Executor executor) {
         this.controller = controller;
         this.executor = executor;
     }

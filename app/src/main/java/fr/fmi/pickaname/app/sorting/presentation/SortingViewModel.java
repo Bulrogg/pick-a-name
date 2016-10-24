@@ -1,8 +1,8 @@
-package fr.fmi.pickaname.app.sort.presentation;
+package fr.fmi.pickaname.app.sorting.presentation;
 
 import android.support.annotation.StringRes;
 
-public class SortViewModel {
+public class SortingViewModel {
 
     public static final int VF_SORT_LOADING = 0;
     public static final int VF_SORT_SUCCESS = 1;
