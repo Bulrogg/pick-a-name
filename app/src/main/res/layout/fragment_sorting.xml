@@ -10,6 +10,10 @@
         <variable
             name="viewModel"
             type="fr.fmi.pickaname.app.sorting.presentation.SortingViewModel"/>
+
+        <variable
+            name="firstName"
+            type="java.lang.String"/>
     </data>
 
     <ViewFlipper
@@ -28,12 +32,47 @@
             android:indeterminateTint="@color/colorAccent"
             android:indeterminateTintMode="src_in"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/colorAccent"
-            android:text="@{viewModel.firstName}"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorAccent"
+                android:text="@{firstName}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorAccent"
+                android:text="@{viewModel.lastName}"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->controller.accept(firstName)}"
+                    android:text="Oui"/>
+
+                <Button
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->controller.refuse(firstName)}"
+                    android:text="Non"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

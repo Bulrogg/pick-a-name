@@ -6,13 +6,13 @@ import fr.fmi.pickaname.core.entities.FirstName;
 import fr.fmi.pickaname.core.exception.TechnicalException;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 
-public class SortInteractor {
+public class SortingInteractor {
 
     private final SortPresenter presenter;
 
     private final GetFirstNamesRepository getFirstNamesRepository;
 
-    public SortInteractor(
+    public SortingInteractor(
             final SortPresenter presenter,
             final GetFirstNamesRepository getFirstNamesRepository
     ) {
@@ -32,4 +32,15 @@ public class SortInteractor {
         }
     }
 
+    public void load() {
+        // TODO ooo
+    }
+
+    public void accept(final String firstName) {
+        // TODO ooo
+    }
+
+    public void refuse(final String firstName) {
+        // TODO ooo
+    }
 }

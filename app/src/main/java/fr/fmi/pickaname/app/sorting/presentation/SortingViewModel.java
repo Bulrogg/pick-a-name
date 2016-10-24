@@ -10,11 +10,9 @@ public class SortingViewModel {
 
     public int displayedChild;
 
-    public boolean shouldHideKeyboard;
-
     @StringRes
     public int errorResId;
 
-    public String firstName;
+    public String lastName;
 
 }

@@ -9,7 +9,7 @@ import fr.fmi.pickaname.app.sorting.controller.SortingControllerImpl;
 import fr.fmi.pickaname.app.sorting.presentation.SortingPresenterImpl;
 import fr.fmi.pickaname.app.sorting.presentation.SortingView;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
-import fr.fmi.pickaname.core.sort.SortInteractor;
+import fr.fmi.pickaname.core.sort.SortingInteractor;
 import fr.fmi.pickaname.core.sort.SortPresenter;
 import fr.fmi.pickaname.repositories.firstname.GetFirstNamesRepositoryImpl;
 
@@ -25,8 +25,8 @@ public class SortingModule {
     }
 
     public SortingController getController() {
-        final SortInteractor interactor = new SortInteractor(getPresenter(),
-                                                             getFirstNamesRepository());
+        final SortingInteractor interactor = new SortingInteractor(getPresenter(),
+                                                                   getFirstNamesRepository());
         final SortingController controller = new SortingControllerImpl(interactor);
         return new SortingControllerDecorator(controller, applicationModule.getAsyncExecutor());
     }

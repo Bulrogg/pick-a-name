@@ -19,8 +19,8 @@ public class SortingPresenterImpl implements SortPresenter {
     public void presentAFirstName(final FirstName firstName) {
         final SortingViewModel viewModel = getViewModel();
         viewModel.displayedChild = SortingViewModel.VF_SORT_SUCCESS;
-        viewModel.firstName = firstName.getFirstName();
         view.displayViewModel(viewModel);
+        view.displayFirstName(firstName.getFirstName());
     }
 
     @Override

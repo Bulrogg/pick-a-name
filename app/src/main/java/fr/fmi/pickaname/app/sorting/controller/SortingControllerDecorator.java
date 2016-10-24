@@ -14,13 +14,32 @@ public class SortingControllerDecorator implements SortingController {
     }
 
     @Override
-    public void loadFirstNames() {
+    public void load() {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                controller.loadFirstNames();
+                controller.load();
             }
         });
     }
 
+    @Override
+    public void accept(final String firstName) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                controller.accept(firstName);
+            }
+        });
+    }
+
+    @Override
+    public void refuse(final String firstName) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                controller.refuse(firstName);
+            }
+        });
+    }
 }

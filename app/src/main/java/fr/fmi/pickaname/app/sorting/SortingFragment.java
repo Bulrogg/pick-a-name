@@ -48,12 +48,17 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
     }
 
     @Override
-    public void displayViewModel(SortingViewModel viewModel) {
+    public void displayViewModel(final SortingViewModel viewModel) {
         binding.setViewModel(viewModel);
     }
 
+    @Override
+    public void displayFirstName(final String firstName) {
+        binding.setFirstName(firstName);
+    }
+
     private void load() {
-        controller.loadFirstNames();
+        controller.load();
     }
 
 }

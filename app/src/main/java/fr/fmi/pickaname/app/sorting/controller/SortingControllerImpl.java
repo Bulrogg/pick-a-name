@@ -1,18 +1,27 @@
 package fr.fmi.pickaname.app.sorting.controller;
 
-import fr.fmi.pickaname.core.sort.SortInteractor;
+import fr.fmi.pickaname.core.sort.SortingInteractor;
 
 public class SortingControllerImpl implements SortingController {
 
-    private final SortInteractor interactor;
+    private final SortingInteractor interactor;
 
-    public SortingControllerImpl(final SortInteractor interactor) {
+    public SortingControllerImpl(final SortingInteractor interactor) {
         this.interactor = interactor;
     }
 
     @Override
-    public void loadFirstNames() {
-        interactor.loadFirstNames();
+    public void load() {
+        interactor.load();
     }
 
+    @Override
+    public void accept(final String firstName) {
+        interactor.accept(firstName);
+    }
+
+    @Override
+    public void refuse(final String firstName) {
+        interactor.refuse(firstName);
+    }
 }
