@@ -16,6 +16,12 @@ public abstract class JsonSorting implements Sorting {
         return new AutoValue_JsonSorting.Builder();
     }
 
+    public static JsonSorting.Builder copy(final Sorting source) {
+        return builder()
+                .setAccepted(source.getAccepted())
+                .setRejected(source.getRejected());
+    }
+
     public abstract List<String> getAccepted();
 
     public abstract List<String> getRejected();

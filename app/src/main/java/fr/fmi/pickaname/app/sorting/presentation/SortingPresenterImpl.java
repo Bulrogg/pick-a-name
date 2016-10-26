@@ -3,9 +3,10 @@ package fr.fmi.pickaname.app.sorting.presentation;
 import android.content.Context;
 
 import fr.fmi.pickaname.core.entities.FirstName;
-import fr.fmi.pickaname.core.sort.SortPresenter;
+import fr.fmi.pickaname.core.sort.SortingPresenter;
 
-public class SortingPresenterImpl implements SortPresenter {
+// TODO tester
+public class SortingPresenterImpl implements SortingPresenter {
 
     private final SortingView view;
     private final Context context;
@@ -16,25 +17,47 @@ public class SortingPresenterImpl implements SortPresenter {
     }
 
     @Override
-    public void presentAFirstName(final FirstName firstName) {
+    public void presentSortingScreen(final String lastName) {
         final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_SORT_SUCCESS;
+        viewModel.displayedChild = SortingViewModel.VF_SUCCESS;
+        viewModel.lastName = lastName;
         view.displayViewModel(viewModel);
+    }
+
+    @Override
+    public void presentProposedFirstName(final FirstName firstName) {
         view.displayFirstName(firstName.getFirstName());
     }
 
     @Override
-    public void presentLoadingFailure() {
+    public void presentTechnicalError() {
         final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_SORT_ERROR;
+        viewModel.displayedChild = SortingViewModel.VF_ERROR;
         view.displayViewModel(viewModel);
     }
 
     @Override
     public void presentLoading() {
         final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_SORT_LOADING;
+        viewModel.displayedChild = SortingViewModel.VF_LOADING;
         view.displayViewModel(viewModel);
+    }
+
+    @Override
+    public void presentNoMoreFirstName() {
+        final SortingViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SortingViewModel.VF_NO_MORE_FIRST_NAME;
+        view.displayViewModel(viewModel);
+    }
+
+    @Override
+    public void presentAcceptSavingError() {
+        // TODO ooo
+    }
+
+    @Override
+    public void presentRefuseSavingError() {
+        // TODO ooo
     }
 
     private SortingViewModel getViewModel() {

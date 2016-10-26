@@ -2,45 +2,85 @@ package fr.fmi.pickaname.core.sort;
 
 import java.util.List;
 
+import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.entities.FirstName;
+import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.exception.TechnicalException;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 
+// TODO tester
 public class SortingInteractor {
 
-    private final SortPresenter presenter;
+    private final SortingPresenter presenter;
 
     private final GetFirstNamesRepository getFirstNamesRepository;
 
+    private final ConfigurationRepository configurationRepository;
+
+    private List<FirstName> firstNamesToPropose;
+
     public SortingInteractor(
-            final SortPresenter presenter,
-            final GetFirstNamesRepository getFirstNamesRepository
+            final SortingPresenter presenter,
+            final GetFirstNamesRepository getFirstNamesRepository,
+            final ConfigurationRepository configurationRepository
     ) {
         this.presenter = presenter;
         this.getFirstNamesRepository = getFirstNamesRepository;
-    }
-
-    public void loadFirstNames() {
-        // TODO ooo avoir de l'aléatoire dans la présentation des prénoms
-        presenter.presentLoading();
-        try {
-            final List<FirstName> firstNames = getFirstNamesRepository.getFirstNames();
-            // TODO ooo attention au tableau vide
-            presenter.presentAFirstName(firstNames.get(0));
-        } catch (TechnicalException e) {
-            presenter.presentLoadingFailure();
-        }
+        this.configurationRepository = configurationRepository;
     }
 
     public void load() {
-        // TODO ooo
+        presenter.presentLoading();
+        try {
+            final Settings settings = configurationRepository.getSettings();
+            presenter.presentSortingScreen(settings.getLastName());
+        } catch (TechnicalException e) {
+            presenter.presentTechnicalError();
+        }
+        presentNextFirstNameToPropose();
     }
 
     public void accept(final String firstName) {
-        // TODO ooo
+        try {
+            configurationRepository.saveAccept(firstName);
+        } catch (TechnicalException e) {
+            presenter.presentAcceptSavingError();
+        }
+        presentNextFirstNameToPropose();
     }
 
     public void refuse(final String firstName) {
-        // TODO ooo
+        try {
+            configurationRepository.saveRefuse(firstName);
+        } catch (TechnicalException e) {
+            presenter.presentRefuseSavingError();
+        }
+        presentNextFirstNameToPropose();
+    }
+
+    void presentNextFirstNameToPropose() {
+        try {
+            final List<FirstName> firstNamesToPropose = getFirstNamesToPropose();
+            if (firstNamesToPropose.isEmpty()) {
+                presenter.presentNoMoreFirstName();
+            } else {
+                presenter.presentProposedFirstName(firstNamesToPropose.get(0));
+                firstNamesToPropose.remove(0);
+            }
+        } catch (TechnicalException e) {
+            presenter.presentTechnicalError();
+        }
+    }
+
+    // TODO tester
+    List<FirstName> getFirstNamesToPropose() throws TechnicalException {
+        if (firstNamesToPropose == null) {
+            firstNamesToPropose = getFirstNamesRepository.getFirstNames();
+            // TODO supprimer les prenoms déjà acceptés
+            // TODO supprimer les prenoms déjà refusés
+            // TODO supprimer les mauvais types
+            // TODO mélanger les prénoms
+        }
+        return firstNamesToPropose;
     }
 }

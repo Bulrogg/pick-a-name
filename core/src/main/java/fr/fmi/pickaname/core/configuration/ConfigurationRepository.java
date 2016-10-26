@@ -12,4 +12,8 @@ public interface ConfigurationRepository {
     Sorting getSorting() throws TechnicalException;
 
     Settings saveSettings(ResearchType researchType, String lastName) throws TechnicalException;
+
+    void saveAccept(String firstName) throws TechnicalException;
+
+    void saveRefuse(String firstName) throws TechnicalException;
 }

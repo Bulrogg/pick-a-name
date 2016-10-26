@@ -4,9 +4,10 @@ import android.support.annotation.StringRes;
 
 public class SortingViewModel {
 
-    public static final int VF_SORT_LOADING = 0;
-    public static final int VF_SORT_SUCCESS = 1;
-    public static final int VF_SORT_ERROR = 2;
+    static final int VF_LOADING = 0;
+    static final int VF_SUCCESS = 1;
+    static final int VF_ERROR = 2;
+    static final int VF_NO_MORE_FIRST_NAME = 3;
 
     public int displayedChild;
 

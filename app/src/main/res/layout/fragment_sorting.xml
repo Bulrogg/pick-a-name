@@ -81,6 +81,13 @@
             android:indeterminateTint="@color/colorAccent"
             android:text="Reload TODO ooo"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:text="No more first name to propose"/>
+
     </ViewFlipper>
 
 </layout>

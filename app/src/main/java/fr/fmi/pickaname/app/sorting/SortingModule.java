@@ -8,9 +8,11 @@ import fr.fmi.pickaname.app.sorting.controller.SortingControllerDecorator;
 import fr.fmi.pickaname.app.sorting.controller.SortingControllerImpl;
 import fr.fmi.pickaname.app.sorting.presentation.SortingPresenterImpl;
 import fr.fmi.pickaname.app.sorting.presentation.SortingView;
+import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 import fr.fmi.pickaname.core.sort.SortingInteractor;
-import fr.fmi.pickaname.core.sort.SortPresenter;
+import fr.fmi.pickaname.core.sort.SortingPresenter;
+import fr.fmi.pickaname.repositories.configuration.ConfigurationRepositoryImpl;
 import fr.fmi.pickaname.repositories.firstname.GetFirstNamesRepositoryImpl;
 
 
@@ -26,16 +28,21 @@ public class SortingModule {
 
     public SortingController getController() {
         final SortingInteractor interactor = new SortingInteractor(getPresenter(),
-                                                                   getFirstNamesRepository());
+                                                                   getFirstNamesRepository(),
+                                                                   getConfigurationRepository());
         final SortingController controller = new SortingControllerImpl(interactor);
         return new SortingControllerDecorator(controller, applicationModule.getAsyncExecutor());
+    }
+
+    private ConfigurationRepository getConfigurationRepository() {
+        return new ConfigurationRepositoryImpl(getObjectMapper());
     }
 
     private GetFirstNamesRepository getFirstNamesRepository() {
         return new GetFirstNamesRepositoryImpl(getObjectMapper());
     }
 
-    private SortPresenter getPresenter() {
+    private SortingPresenter getPresenter() {
         return new SortingPresenterImpl(view, applicationModule.getContext());
     }
 

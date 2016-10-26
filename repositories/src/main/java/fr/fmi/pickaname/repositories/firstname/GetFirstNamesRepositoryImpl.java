@@ -13,7 +13,6 @@ import fr.fmi.pickaname.core.exception.TechnicalException;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 import fr.fmi.pickaname.model.JsonFirstName;
 
-// TODO ooo gérer un cache
 public class GetFirstNamesRepositoryImpl implements GetFirstNamesRepository {
 
     private final ObjectMapper mapper;
@@ -22,10 +21,11 @@ public class GetFirstNamesRepositoryImpl implements GetFirstNamesRepository {
         this.mapper = mapper;
     }
 
+    // TODO passer en singleton et ajouter un cache en ram
     @Override
     public List<FirstName> getFirstNames() throws TechnicalException {
         try {
-            final URL resource =  getClass().getResource("/first-names.json");
+            final URL resource = getClass().getResource("/first-names.json");
             final ArrayList<FirstName> firstNames = new ArrayList<>();
             firstNames.addAll(Arrays.asList(mapper.readValue(resource, JsonFirstName[].class)));
             return firstNames;
