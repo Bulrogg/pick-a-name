@@ -2,7 +2,6 @@ package fr.fmi.pickaname.app.settings;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.app.AbstractMainFragment;
 import fr.fmi.pickaname.app.settings.controller.SettingsController;
 import fr.fmi.pickaname.app.settings.presentation.SettingsView;
-import fr.fmi.pickaname.app.settings.presentation.SettingsViewModel;
+import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
 import fr.fmi.pickaname.databinding.FragmentSettingsBinding;
 
 import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
@@ -50,13 +49,13 @@ public class SettingsFragment extends AbstractMainFragment implements SettingsVi
     }
 
     @Override
-    public void displayViewModel(final SettingsViewModel viewModel) {
+    public void displayViewModel(final SettingsScreenViewModel viewModel) {
         binding.setViewModel(viewModel);
     }
 
     @Override
-    public void displayToast(@StringRes int messageResId) {
-        binding.setToastMessage(getString(messageResId));
+    public void displayToast(final String message) {
+        binding.setToastMessage(message);
     }
 
     private void load() {

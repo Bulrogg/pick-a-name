@@ -29,9 +29,13 @@
         <item>BOTH</item>
     </string-array>
 
-    <!-- TODO -->
-    <string name="fragment_about_title">A propos</string>
+    <!-- fragment sorting -->
     <string name="fragment_sort_title">Trier</string>
+    <string name="fragment_sort_accept_error">Problème pendant l\'enregistrement</string>
+    <string name="fragment_sort_refuse_error">Problème pendant l\'enregistrement</string>
+
+    <!-- other -->
+    <string name="fragment_about_title">A propos</string>
     <string name="fragment_accepted_title">Prénoms retenus</string>
     <string name="fragment_rejected_title">Prénoms rejetés</string>
     <string name="fragment_feedback_title">Feedback</string>

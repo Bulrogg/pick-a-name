@@ -1,10 +1,10 @@
 package fr.fmi.pickaname.app.settings.controller;
 
-import fr.fmi.pickaname.app.settings.presentation.SettingsViewModel;
+import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
 
 public interface SettingsController {
 
     void loadSettings();
 
-    void saveSettings(SettingsViewModel viewModel);
+    void saveSettings(SettingsScreenViewModel viewModel);
 }

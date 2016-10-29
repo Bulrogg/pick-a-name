@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import fr.fmi.pickaname.app.settings.presentation.SettingsViewModel;
+import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.settings.SettingsInteractor;
 
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 public class SettingsControllerImplTest {
 
     @Mock SettingsInteractor interactor;
-    @Mock SettingsViewModel viewModel;
+    @Mock SettingsScreenViewModel viewModel;
     @InjectMocks SettingsControllerImpl controller;
 
     @Captor ArgumentCaptor<Settings.ResearchType> researchTypeCaptor;

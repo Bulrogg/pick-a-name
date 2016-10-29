@@ -2,10 +2,10 @@ package fr.fmi.pickaname.app.sorting.presentation;
 
 import android.content.Context;
 
+import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.core.entities.FirstName;
 import fr.fmi.pickaname.core.sort.SortingPresenter;
 
-// TODO tester
 public class SortingPresenterImpl implements SortingPresenter {
 
     private final SortingView view;
@@ -18,10 +18,10 @@ public class SortingPresenterImpl implements SortingPresenter {
 
     @Override
     public void presentSortingScreen(final String lastName) {
-        final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_SUCCESS;
+        final SortingScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SortingScreenViewModel.VF_SUCCESS;
         viewModel.lastName = lastName;
-        view.displayViewModel(viewModel);
+        view.displayScreenViewModel(viewModel);
     }
 
     @Override
@@ -31,37 +31,37 @@ public class SortingPresenterImpl implements SortingPresenter {
 
     @Override
     public void presentTechnicalError() {
-        final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_ERROR;
-        view.displayViewModel(viewModel);
+        final SortingScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SortingScreenViewModel.VF_ERROR;
+        view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentLoading() {
-        final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_LOADING;
-        view.displayViewModel(viewModel);
+        final SortingScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SortingScreenViewModel.VF_LOADING;
+        view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentNoMoreFirstName() {
-        final SortingViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingViewModel.VF_NO_MORE_FIRST_NAME;
-        view.displayViewModel(viewModel);
+        final SortingScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SortingScreenViewModel.VF_NO_MORE_FIRST_NAME;
+        view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentAcceptSavingError() {
-        // TODO ooo
+        view.displayToast(context.getString(R.string.fragment_sort_accept_error));
     }
 
     @Override
     public void presentRefuseSavingError() {
-        // TODO ooo
+        view.displayToast(context.getString(R.string.fragment_sort_refuse_error));
     }
 
-    private SortingViewModel getViewModel() {
-        return new SortingViewModel();
+    private SortingScreenViewModel getViewModel() {
+        return new SortingScreenViewModel();
     }
 
 }

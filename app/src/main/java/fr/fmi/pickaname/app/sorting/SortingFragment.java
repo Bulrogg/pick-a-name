@@ -10,7 +10,7 @@ import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.app.AbstractMainFragment;
 import fr.fmi.pickaname.app.sorting.controller.SortingController;
 import fr.fmi.pickaname.app.sorting.presentation.SortingView;
-import fr.fmi.pickaname.app.sorting.presentation.SortingViewModel;
+import fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel;
 import fr.fmi.pickaname.databinding.FragmentSortingBinding;
 
 import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
@@ -20,6 +20,7 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
     private FragmentSortingBinding binding;
     private SortingController controller;
 
+    @Override
     public View onCreateView(
             final LayoutInflater inflater,
             final ViewGroup container,
@@ -48,13 +49,18 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
     }
 
     @Override
-    public void displayViewModel(final SortingViewModel viewModel) {
+    public void displayScreenViewModel(final SortingScreenViewModel viewModel) {
         binding.setViewModel(viewModel);
     }
 
     @Override
     public void displayFirstName(final String firstName) {
         binding.setFirstName(firstName);
+    }
+
+    @Override
+    public void displayToast(final String message) {
+        binding.setToastMessage(message);
     }
 
     private void load() {

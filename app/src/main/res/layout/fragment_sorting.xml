@@ -9,10 +9,14 @@
 
         <variable
             name="viewModel"
-            type="fr.fmi.pickaname.app.sorting.presentation.SortingViewModel"/>
+            type="fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel"/>
 
         <variable
             name="firstName"
+            type="java.lang.String"/>
+
+        <variable
+            name="toastMessage"
             type="java.lang.String"/>
     </data>
 
@@ -23,7 +27,7 @@
         android:outAnimation="@android:anim/fade_out"
         android:padding="16dp"
         bind:displayedChild="@{viewModel.displayedChild}"
-        bind:toast="@{viewModel.errorResId}">
+        bind:toast="@{toastMessage}">
 
         <ProgressBar
             android:layout_width="wrap_content"

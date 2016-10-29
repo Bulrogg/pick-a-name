@@ -25,8 +25,8 @@ public class SettingsPresenterImplTest {
     @Mock private Settings settings;
     @InjectMocks SettingsPresenterImpl presenter;
 
-    @Captor ArgumentCaptor<SettingsViewModel> viewModelCaptor;
-    @Captor ArgumentCaptor<Integer> resIdCaptor;
+    @Captor ArgumentCaptor<SettingsScreenViewModel> viewModelCaptor;
+    @Captor ArgumentCaptor<String> messageCaptor;
 
     @Before
     public void setup() {
@@ -42,7 +42,7 @@ public class SettingsPresenterImplTest {
 
         // Then
         verify(view, only()).displayViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsViewModel.VF_LOADING);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsScreenViewModel.VF_LOADING);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class SettingsPresenterImplTest {
 
         // Then
         verify(view, only()).displayViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsViewModel.VF_SUCCESS);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsScreenViewModel.VF_SUCCESS);
         assertThat(viewModelCaptor.getValue().lastName).isEqualTo("LAST NAME");
         assertThat(viewModelCaptor.getValue().researchType).isEqualTo("GIRL");
     }
@@ -70,31 +70,33 @@ public class SettingsPresenterImplTest {
 
         // Then
         verify(view, only()).displayViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsViewModel.VF_ERROR);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsScreenViewModel.VF_ERROR);
     }
 
     @Test
     public void presentSaveSettingsSuccess_ShouldCorrectlySetupTheView() throws Exception {
         // Given
+        given(context.getString(R.string.fragment_settings_save_success)).willReturn("OK");
 
         // When
         presenter.presentSaveSettingsSuccess();
 
         // Then
-        verify(view, only()).displayToast(resIdCaptor.capture());
-        assertThat(resIdCaptor.getValue()).isEqualTo(R.string.fragment_settings_save_success);
+        verify(view, only()).displayToast(messageCaptor.capture());
+        assertThat(messageCaptor.getValue()).isEqualTo("OK");
     }
 
     @Test
     public void presentSaveSettingsFailure_ShouldCorrectlySetupTheView() throws Exception {
         // Given
+        given(context.getString(R.string.fragment_settings_save_failure)).willReturn("KO");
 
         // When
         presenter.presentSaveSettingsFailure();
 
         // Then
-        verify(view, only()).displayToast(resIdCaptor.capture());
-        assertThat(resIdCaptor.getValue()).isEqualTo(R.string.fragment_settings_save_failure);
+        verify(view, only()).displayToast(messageCaptor.capture());
+        assertThat(messageCaptor.getValue()).isEqualTo("KO");
     }
 
 }

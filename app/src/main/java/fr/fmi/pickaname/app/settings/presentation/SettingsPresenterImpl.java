@@ -18,15 +18,15 @@ public class SettingsPresenterImpl implements SettingsPresenter {
 
     @Override
     public void presentLoading() {
-        final SettingsViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SettingsViewModel.VF_LOADING;
+        final SettingsScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SettingsScreenViewModel.VF_LOADING;
         view.displayViewModel(viewModel);
     }
 
     @Override
     public void presentSettings(final Settings settings) {
-        final SettingsViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SettingsViewModel.VF_SUCCESS;
+        final SettingsScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SettingsScreenViewModel.VF_SUCCESS;
         viewModel.lastName = settings.getLastName();
         viewModel.researchType = settings.getResearchType().name();
         view.displayViewModel(viewModel);
@@ -34,22 +34,22 @@ public class SettingsPresenterImpl implements SettingsPresenter {
 
     @Override
     public void presentLoadingFailure() {
-        final SettingsViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SettingsViewModel.VF_ERROR;
+        final SettingsScreenViewModel viewModel = getViewModel();
+        viewModel.displayedChild = SettingsScreenViewModel.VF_ERROR;
         view.displayViewModel(viewModel);
     }
 
     @Override
     public void presentSaveSettingsSuccess() {
-        view.displayToast(R.string.fragment_settings_save_success);
+        view.displayToast(context.getString(R.string.fragment_settings_save_success));
     }
 
     @Override
     public void presentSaveSettingsFailure() {
-        view.displayToast(R.string.fragment_settings_save_failure);
+        view.displayToast(context.getString(R.string.fragment_settings_save_failure));
     }
 
-    private SettingsViewModel getViewModel() {
-        return new SettingsViewModel();
+    private SettingsScreenViewModel getViewModel() {
+        return new SettingsScreenViewModel();
     }
 }

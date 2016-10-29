@@ -8,7 +8,6 @@ import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.exception.TechnicalException;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 
-// TODO tester
 public class SortingInteractor {
 
     private final SortingPresenter presenter;
