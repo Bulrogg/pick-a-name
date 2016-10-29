@@ -16,25 +16,33 @@ public abstract class JsonConfiguration implements Configuration {
         return new AutoValue_JsonConfiguration.Builder();
     }
 
-    public static Builder copy(final Configuration source) {
+    public static Builder copy(final JsonConfiguration source) {
         return builder()
-                .setSettings(source.getSettings())
-                .setSorting(source.getSorting());
+                .setJsonSettings(source.getJsonSettings())
+                .setJsonSorting(source.getJsonSorting());
     }
 
-    public abstract Settings getSettings();
+    public abstract JsonSettings getJsonSettings();
 
-    public abstract Sorting getSorting();
+    public abstract JsonSorting getJsonSorting();
+
+    public Settings getSettings() {
+        return getJsonSettings();
+    }
+
+    public Sorting getSorting() {
+        return getJsonSorting();
+    }
 
     @SuppressWarnings("unused")
     @AutoValue.Builder
     public abstract static class Builder {
 
         @JsonProperty("settings")
-        public abstract Builder setSettings(Settings settings);
+        public abstract Builder setJsonSettings(JsonSettings settings);
 
         @JsonProperty("sorting")
-        public abstract Builder setSorting(Sorting sorting);
+        public abstract Builder setJsonSorting(JsonSorting sorting);
 
         public abstract JsonConfiguration build();
     }

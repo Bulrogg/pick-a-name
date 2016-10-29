@@ -3,7 +3,6 @@ package fr.fmi.pickaname.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -21,8 +20,6 @@ public class JsonConfigurationTest {
         mapper = new MapperModule().getObjectMapper();
     }
 
-    // TODO ooo ne passe pas à cause du système d'interface
-    @Ignore
     @Test
     public void deserialization() throws IOException {
         // Given

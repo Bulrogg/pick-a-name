@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
-import fr.fmi.pickaname.core.entities.Configuration;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.entities.Settings.ResearchType;
 import fr.fmi.pickaname.core.entities.Sorting;
@@ -21,7 +20,7 @@ import static fr.fmi.pickaname.core.entities.Settings.ResearchType.BOTH;
 public class ConfigurationRepositoryImpl implements ConfigurationRepository {
 
     // TODO put in SharedPreference
-    private static Configuration configuration;
+    private static JsonConfiguration configuration;
 
     private final ObjectMapper mapper;
 
@@ -46,7 +45,7 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
     ) throws TechnicalException {
         configuration = JsonConfiguration
                 .copy(getConfiguration())
-                .setSettings(JsonSettings.builder()
+                .setJsonSettings(JsonSettings.builder()
                                          .setLastName(lastName)
                                          .setResearchType(researchType)
                                          .build())
@@ -56,37 +55,37 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
 
     @Override
     public void saveAccept(final String firstName) throws TechnicalException {
-        final Configuration oldConfiguration = getConfiguration();
+        final JsonConfiguration oldConfiguration = getConfiguration();
         final Sorting sorting = oldConfiguration.getSorting();
         final List<String> accepted = sorting.getAccepted();
         accepted.add(firstName);
         configuration = JsonConfiguration
                 .copy(oldConfiguration)
-                .setSorting(JsonSorting.copy(sorting).setAccepted(accepted).build())
+                .setJsonSorting(JsonSorting.copy(sorting).setAccepted(accepted).build())
                 .build();
     }
 
     @Override
     public void saveRefuse(final String firstName) throws TechnicalException {
-        final Configuration oldConfiguration = getConfiguration();
+        final JsonConfiguration oldConfiguration = getConfiguration();
         final Sorting sorting = oldConfiguration.getSorting();
         final List<String> rejected = sorting.getRejected();
         rejected.add(firstName);
         configuration = JsonConfiguration
                 .copy(oldConfiguration)
-                .setSorting(JsonSorting.copy(sorting).setRejected(rejected).build())
+                .setJsonSorting(JsonSorting.copy(sorting).setRejected(rejected).build())
                 .build();
     }
 
-    Configuration getConfiguration() {
+    JsonConfiguration getConfiguration() {
         if (configuration == null) {
             configuration = JsonConfiguration
                     .builder()
-                    .setSettings(JsonSettings.builder()
+                    .setJsonSettings(JsonSettings.builder()
                                              .setLastName("Default-lastname")
                                              .setResearchType(BOTH)
                                              .build())
-                    .setSorting(JsonSorting.builder()
+                    .setJsonSorting(JsonSorting.builder()
                                            .setAccepted(new ArrayList<String>())
                                            .setRejected(new ArrayList<String>())
                                            .build())

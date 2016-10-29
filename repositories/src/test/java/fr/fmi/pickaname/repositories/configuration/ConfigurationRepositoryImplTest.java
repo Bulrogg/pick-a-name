@@ -8,9 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import fr.fmi.pickaname.core.entities.Configuration;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.entities.Sorting;
+import fr.fmi.pickaname.model.JsonConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -20,7 +20,7 @@ public class ConfigurationRepositoryImplTest {
 
     @Mock Sorting sorting;
     @Mock Settings settings;
-    @Mock Configuration configuration;
+    @Mock JsonConfiguration configuration;
     @Mock ObjectMapper mapper;
     @InjectMocks ConfigurationRepositoryImpl repository;
 
@@ -32,7 +32,6 @@ public class ConfigurationRepositoryImplTest {
         given(configuration.getSorting()).willReturn(sorting);
         given(repository.getConfiguration()).willReturn(configuration);
     }
-
 
     @Test
     public void getSettings_ShouldReturnTheSaveSettings() throws Exception {
