@@ -17,13 +17,21 @@ public class GetFirstNamesRepositoryImpl implements GetFirstNamesRepository {
 
     private final ObjectMapper mapper;
 
+    private List<FirstName> firstNames;
+
     public GetFirstNamesRepositoryImpl(final ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
-    // TODO passer en singleton et ajouter un cache en ram
     @Override
     public List<FirstName> getFirstNames() throws TechnicalException {
+        if (firstNames == null) {
+            firstNames = fetchFirstNames();
+        }
+        return firstNames;
+    }
+
+    private List<FirstName> fetchFirstNames() throws TechnicalException {
         try {
             final URL resource = getClass().getResource("/first-names.json");
             final ArrayList<FirstName> firstNames = new ArrayList<>();

@@ -13,14 +13,14 @@ import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class GetFirstNamesRepositoryImplTest {
 
+    private ObjectMapper mapper;
     private GetFirstNamesRepository repository;
 
     @Before
     public void setup() {
-        final ObjectMapper mapper = new MapperModule().getObjectMapper();
+        mapper = new MapperModule().getObjectMapper();
         repository = new GetFirstNamesRepositoryImpl(mapper);
     }
 
@@ -32,7 +32,7 @@ public class GetFirstNamesRepositoryImplTest {
         final List<FirstName> firstNames = repository.getFirstNames();
 
         // Then
-         assertThat(firstNames).hasSize(1246);
+        assertThat(firstNames).hasSize(1246);
     }
 
 }

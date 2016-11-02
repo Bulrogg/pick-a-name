@@ -1,7 +1,5 @@
 package fr.fmi.pickaname.app.settings;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import fr.fmi.pickaname.app.ApplicationModule;
 import fr.fmi.pickaname.app.settings.controller.SettingsController;
 import fr.fmi.pickaname.app.settings.controller.SettingsControllerDecorator;
@@ -33,15 +31,12 @@ public class SettingsModule {
         return new SettingsPresenterImpl(view, appModule.getContext());
     }
 
-    private ObjectMapper getObjectMapper() {
-        return appModule.getMapperModule().getObjectMapper();
-    }
-
     private SettingsInteractor getSettingsInteractor() {
         return new SettingsInteractor(getPresenter(), getConfigurationRepository());
     }
 
     private ConfigurationRepository getConfigurationRepository() {
-        return new ConfigurationRepositoryImpl(appModule.getDeviceStorage(), getObjectMapper());
+        return new ConfigurationRepositoryImpl(appModule.getDeviceStorage(),
+                                               appModule.getObjectMapper());
     }
 }
