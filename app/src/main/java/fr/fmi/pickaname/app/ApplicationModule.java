@@ -1,11 +1,15 @@
 package fr.fmi.pickaname.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import fr.fmi.pickaname.MapperModule;
+import fr.fmi.pickaname.app.storage.DeviceStorageImpl;
+import fr.fmi.pickaname.core.storage.DeviceStorage;
 
 public class ApplicationModule {
 
@@ -29,6 +33,14 @@ public class ApplicationModule {
 
     public MapperModule getMapperModule() {
         return mapperModule;
+    }
+
+    public SharedPreferences getSharedPreference() {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public DeviceStorage getDeviceStorage() {
+        return new DeviceStorageImpl(getSharedPreference());
     }
 
 }

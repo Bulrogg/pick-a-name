@@ -16,25 +16,25 @@ import fr.fmi.pickaname.repositories.configuration.ConfigurationRepositoryImpl;
 
 public class SettingsModule {
 
-    private final ApplicationModule applicationModule;
+    private final ApplicationModule appModule;
     private final SettingsView view;
 
-    public SettingsModule(final ApplicationModule applicationModule, final SettingsView view) {
-        this.applicationModule = applicationModule;
+    public SettingsModule(final ApplicationModule appModule, final SettingsView view) {
+        this.appModule = appModule;
         this.view = view;
     }
 
     public SettingsController getController() {
         final SettingsController controller = new SettingsControllerImpl(getSettingsInteractor());
-        return new SettingsControllerDecorator(controller, applicationModule.getAsyncExecutor());
+        return new SettingsControllerDecorator(controller, appModule.getAsyncExecutor());
     }
 
     private SettingsPresenter getPresenter() {
-        return new SettingsPresenterImpl(view, applicationModule.getContext());
+        return new SettingsPresenterImpl(view, appModule.getContext());
     }
 
     private ObjectMapper getObjectMapper() {
-        return applicationModule.getMapperModule().getObjectMapper();
+        return appModule.getMapperModule().getObjectMapper();
     }
 
     private SettingsInteractor getSettingsInteractor() {
@@ -42,6 +42,6 @@ public class SettingsModule {
     }
 
     private ConfigurationRepository getConfigurationRepository() {
-        return new ConfigurationRepositoryImpl(getObjectMapper());
+        return new ConfigurationRepositoryImpl(appModule.getDeviceStorage(), getObjectMapper());
     }
 }

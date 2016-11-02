@@ -18,11 +18,11 @@ import fr.fmi.pickaname.repositories.firstname.GetFirstNamesRepositoryImpl;
 
 public class SortingModule {
 
-    private final ApplicationModule applicationModule;
+    private final ApplicationModule appModule;
     private final SortingView view;
 
-    public SortingModule(final ApplicationModule applicationModule, final SortingView view) {
-        this.applicationModule = applicationModule;
+    public SortingModule(final ApplicationModule appModule, final SortingView view) {
+        this.appModule = appModule;
         this.view = view;
     }
 
@@ -31,11 +31,11 @@ public class SortingModule {
                                                                    getFirstNamesRepository(),
                                                                    getConfigurationRepository());
         final SortingController controller = new SortingControllerImpl(interactor);
-        return new SortingControllerDecorator(controller, applicationModule.getAsyncExecutor());
+        return new SortingControllerDecorator(controller, appModule.getAsyncExecutor());
     }
 
     private ConfigurationRepository getConfigurationRepository() {
-        return new ConfigurationRepositoryImpl(getObjectMapper());
+        return new ConfigurationRepositoryImpl(appModule.getDeviceStorage(), getObjectMapper());
     }
 
     private GetFirstNamesRepository getFirstNamesRepository() {
@@ -43,10 +43,10 @@ public class SortingModule {
     }
 
     private SortingPresenter getPresenter() {
-        return new SortingPresenterImpl(view, applicationModule.getContext());
+        return new SortingPresenterImpl(view, appModule.getContext());
     }
 
     private ObjectMapper getObjectMapper() {
-        return applicationModule.getMapperModule().getObjectMapper();
+        return appModule.getMapperModule().getObjectMapper();
     }
 }
