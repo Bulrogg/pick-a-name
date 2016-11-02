@@ -1,5 +1,6 @@
 package fr.fmi.pickaname.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
@@ -22,14 +23,18 @@ public abstract class JsonConfiguration implements Configuration {
                 .setJsonSorting(source.getJsonSorting());
     }
 
+    @JsonProperty("settings")
     public abstract JsonSettings getJsonSettings();
 
+    @JsonProperty("sorting")
     public abstract JsonSorting getJsonSorting();
 
+    @JsonIgnore
     public Settings getSettings() {
         return getJsonSettings();
     }
 
+    @JsonIgnore
     public Sorting getSorting() {
         return getJsonSorting();
     }

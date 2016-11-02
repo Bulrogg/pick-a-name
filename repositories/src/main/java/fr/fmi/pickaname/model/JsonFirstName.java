@@ -10,6 +10,10 @@ import fr.fmi.pickaname.core.entities.FirstName;
 @AutoValue
 public abstract class JsonFirstName implements FirstName {
 
+    public static Builder builder() {
+        return new AutoValue_JsonFirstName.Builder();
+    }
+
     public abstract String getFirstName();
 
     public abstract Gender getGender();

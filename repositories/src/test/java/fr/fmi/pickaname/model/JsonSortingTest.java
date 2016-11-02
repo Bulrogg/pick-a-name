@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
+import java.util.Arrays;
 
 import fr.fmi.pickaname.MapperModule;
 
@@ -21,7 +21,7 @@ public class JsonSortingTest {
     }
 
     @Test
-    public void deserialization() throws IOException {
+    public void deserialization() throws Exception {
         // Given
         final String json = "{ \"accepted\": [\"aA\", \"aB\"], \"rejected\": [\"rA\", \"rB\"] }";
 
@@ -31,6 +31,21 @@ public class JsonSortingTest {
         // Then
         assertThat(obj.getAccepted()).containsExactly("aA", "aB");
         assertThat(obj.getRejected()).containsExactly("rA", "rB");
+    }
+
+    @Test
+    public void serialization() throws Exception {
+        // Given
+        final JsonSorting obj = JsonSorting.builder()
+                                           .setAccepted(Arrays.asList("aA", "aB"))
+                                           .setRejected(Arrays.asList("rA", "ar"))
+                                           .build();
+
+        // When
+        final String json = mapper.writeValueAsString(obj);
+
+        // Then
+        assertThat(json).isEqualTo("{\"accepted\":[\"aA\",\"aB\"],\"rejected\":[\"rA\",\"ar\"]}");
     }
 
 }

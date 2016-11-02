@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-
 import fr.fmi.pickaname.MapperModule;
 import fr.fmi.pickaname.core.entities.FirstName;
 
@@ -22,7 +20,7 @@ public class JsonFirstNameTest {
     }
 
     @Test
-    public void deserialization() throws IOException {
+    public void deserialization() throws Exception {
         // Given
         final String json = "{ \"first-name\" : \"Frédéric\", \"gender\" : \"MALE\" }";
 
@@ -32,6 +30,21 @@ public class JsonFirstNameTest {
         // Then
         assertThat(obj.getFirstName()).isEqualTo("Frédéric");
         assertThat(obj.getGender()).isEqualTo(FirstName.Gender.MALE);
+    }
+
+    @Test
+    public void serialization() throws Exception {
+        // Given
+        final JsonFirstName obj = JsonFirstName.builder()
+                                               .setFirstName("Frédéric")
+                                               .setGender(FirstName.Gender.MALE)
+                                               .build();
+
+        // When
+        final String json = mapper.writeValueAsString(obj);
+
+        // Then
+        assertThat(json).isEqualTo("{\"firstName\":\"Frédéric\",\"gender\":\"MALE\"}");
     }
 
 }

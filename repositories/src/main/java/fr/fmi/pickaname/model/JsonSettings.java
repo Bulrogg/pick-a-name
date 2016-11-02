@@ -22,10 +22,10 @@ public abstract class JsonSettings implements Settings {
     @AutoValue.Builder
     public abstract static class Builder {
 
-        @JsonProperty("last-name")
+        @JsonProperty("lastName")
         public abstract Builder setLastName(String lastName);
 
-        @JsonProperty("research-type")
+        @JsonProperty("researchType")
         public abstract Builder setResearchType(Settings.ResearchType researchType);
 
         public abstract JsonSettings build();
