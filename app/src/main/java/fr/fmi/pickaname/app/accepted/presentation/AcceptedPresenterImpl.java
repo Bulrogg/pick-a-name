@@ -1,7 +1,6 @@
 package fr.fmi.pickaname.app.accepted.presentation;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.List;
 import fr.fmi.pickaname.app.accepted.FirstNameViewModel;
 import fr.fmi.pickaname.core.accepted.AcceptedPresenter;
 
-// TODO ooo tester
 public class AcceptedPresenterImpl implements AcceptedPresenter {
 
     private final AcceptedView view;
@@ -35,18 +33,6 @@ public class AcceptedPresenterImpl implements AcceptedPresenter {
         view.displayFirstNames(prepareFirstNameViewModels(firstNames, lastNames));
     }
 
-    @NonNull
-    private List<FirstNameViewModel> prepareFirstNameViewModels(
-            List<String> firstNames,
-            String lastNames
-    ) {
-        final List<FirstNameViewModel> firstNameViewModels = new ArrayList<>();
-        for (final String firstName : firstNames) {
-            firstNameViewModels.add(new FirstNameViewModel(firstName, lastNames));
-        }
-        return firstNameViewModels;
-    }
-
     @Override
     public void presentNoFirstNameAccepted() {
         final AcceptedScreenViewModel viewModel = getViewModel();
@@ -63,5 +49,16 @@ public class AcceptedPresenterImpl implements AcceptedPresenter {
 
     private AcceptedScreenViewModel getViewModel() {
         return new AcceptedScreenViewModel();
+    }
+
+    private List<FirstNameViewModel> prepareFirstNameViewModels(
+            final List<String> firstNames,
+            final String lastNames
+    ) {
+        final List<FirstNameViewModel> firstNameViewModels = new ArrayList<>();
+        for (final String firstName : firstNames) {
+            firstNameViewModels.add(new FirstNameViewModel(firstName, lastNames));
+        }
+        return firstNameViewModels;
     }
 }
