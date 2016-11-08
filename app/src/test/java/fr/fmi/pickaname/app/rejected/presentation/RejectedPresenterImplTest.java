@@ -1,4 +1,4 @@
-package fr.fmi.pickaname.app.accepted.presentation;
+package fr.fmi.pickaname.app.rejected.presentation;
 
 import android.content.Context;
 
@@ -17,20 +17,20 @@ import java.util.List;
 
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_ERROR;
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_LOADING;
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_NO_FIRST_NAME_ACCEPTED;
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_SUCCESS;
+import static fr.fmi.pickaname.app.rejected.presentation.RejectedScreenViewModel.VF_ERROR;
+import static fr.fmi.pickaname.app.rejected.presentation.RejectedScreenViewModel.VF_LOADING;
+import static fr.fmi.pickaname.app.rejected.presentation.RejectedScreenViewModel.VF_NO_FIRST_NAME_REJECTED;
+import static fr.fmi.pickaname.app.rejected.presentation.RejectedScreenViewModel.VF_SUCCESS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
-public class AcceptedPresenterImplTest {
+public class RejectedPresenterImplTest {
 
-    @Mock AcceptedView view;
+    @Mock RejectedView view;
     @Mock Context context;
-    @InjectMocks AcceptedPresenterImpl presenter;
+    @InjectMocks RejectedPresenterImpl presenter;
 
-    @Captor ArgumentCaptor<AcceptedScreenViewModel> viewModelCaptor;
+    @Captor ArgumentCaptor<RejectedScreenViewModel> viewModelCaptor;
     @Captor ArgumentCaptor<List<FirstNameViewModel>> itemsViewModelCaptor;
 
     @Before
@@ -70,15 +70,15 @@ public class AcceptedPresenterImplTest {
     }
 
     @Test
-    public void presentNoFirstNameAccepted_ShouldCorrectlySetupTheView() throws Exception {
+    public void presentNoFirstNameRejected_ShouldCorrectlySetupTheView() throws Exception {
         // Given
 
         // When
-        presenter.presentNoFirstNameAccepted();
+        presenter.presentNoFirstNameRejected();
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_NO_FIRST_NAME_ACCEPTED);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_NO_FIRST_NAME_REJECTED);
     }
 
     @Test

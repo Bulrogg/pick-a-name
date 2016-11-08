@@ -1,12 +1,12 @@
-package fr.fmi.pickaname.app.accepted.presentation;
+package fr.fmi.pickaname.app.rejected.presentation;
 
 import java.util.List;
 
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 
-public interface AcceptedView {
+public interface RejectedView {
 
-    void displayScreenViewModel(AcceptedScreenViewModel viewModel);
+    void displayScreenViewModel(RejectedScreenViewModel viewModel);
 
     void displayToast(String message);
 

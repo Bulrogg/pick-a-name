@@ -15,6 +15,8 @@ import fr.fmi.pickaname.app.AbstractMainFragment;
 import fr.fmi.pickaname.app.accepted.controller.AcceptedController;
 import fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel;
 import fr.fmi.pickaname.app.accepted.presentation.AcceptedView;
+import fr.fmi.pickaname.app.common.firstname.FirstNameAdapter;
+import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 import fr.fmi.pickaname.databinding.FragmentAcceptedBinding;
 
 import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
@@ -44,13 +46,6 @@ public class AcceptedFragment extends AbstractMainFragment implements AcceptedVi
         return binding.getRoot();
     }
 
-    private void initRecyclerView() {
-        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        binding.recyclerAccepted.setHasFixedSize(true);
-        binding.recyclerAccepted.setLayoutManager(layoutManager);
-        binding.recyclerAccepted.setAdapter(adapter);
-    }
-
     @Override
     public int getTitleId() {
         return R.string.fragment_accepted_title;
@@ -78,6 +73,13 @@ public class AcceptedFragment extends AbstractMainFragment implements AcceptedVi
 
     private void load() {
         controller.load();
+    }
+
+    private void initRecyclerView() {
+        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        binding.recyclerAccepted.setHasFixedSize(true);
+        binding.recyclerAccepted.setLayoutManager(layoutManager);
+        binding.recyclerAccepted.setAdapter(adapter);
     }
 
 }

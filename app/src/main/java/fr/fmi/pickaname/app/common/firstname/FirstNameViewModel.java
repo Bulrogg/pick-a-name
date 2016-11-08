@@ -1,4 +1,4 @@
-package fr.fmi.pickaname.app.accepted;
+package fr.fmi.pickaname.app.common.firstname;
 
 public class FirstNameViewModel {
 
