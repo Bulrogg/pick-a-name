@@ -20,6 +20,10 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
     private FragmentSortingBinding binding;
     private SortingController controller;
 
+    public static SortingFragment newInstance() {
+        return new SortingFragment();
+    }
+
     @Override
     public View onCreateView(
             final LayoutInflater inflater,
@@ -32,10 +36,6 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
         binding.setController(controller);
         load();
         return binding.getRoot();
-    }
-
-    public static SortingFragment newInstance() {
-        return new SortingFragment();
     }
 
     @Override

@@ -1,6 +1,58 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:gravity="center"
-          android:text=" TODO Accepted"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="controller"
+            type="fr.fmi.pickaname.app.accepted.controller.AcceptedController"/>
+
+        <variable
+            name="viewModel"
+            type="fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel"/>
+
+        <variable
+            name="toastMessage"
+            type="java.lang.String"/>
+
+    </data>
+
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@android:anim/fade_in"
+        android:outAnimation="@android:anim/fade_out"
+        android:padding="16dp"
+        bind:displayedChild="@{viewModel.displayedChild}"
+        bind:toast="@{toastMessage}">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:indeterminateTintMode="src_in"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_accepted"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:text="Reload TODO"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:text="No first name accepted TODO"/>
+
+    </ViewFlipper>
+
+</layout>
