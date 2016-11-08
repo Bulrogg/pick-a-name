@@ -19,6 +19,7 @@ import fr.fmi.pickaname.model.JsonSorting;
 
 import static fr.fmi.pickaname.core.entities.Settings.ResearchType.BOTH;
 
+// TODO passer en singleton et mettre la conf en ram
 public class ConfigurationRepositoryImpl implements ConfigurationRepository {
 
     private static final String USER_CONFIGURATION_KEY = "USER_CONFIGURATION_KEY";
