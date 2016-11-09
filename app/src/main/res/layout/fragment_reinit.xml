@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="controller"
+            type="fr.fmi.pickaname.app.reinit.controller.ReinitController"/>
+
+        <variable
+            name="toastMessage"
+            type="java.lang.String"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        bind:toast="@{toastMessage}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En réinitialisant, bla bla bla :"/>
+
+        <Button
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->controller.reinitialize()}"
+            android:text="Réinitialiser"/>
+
+    </LinearLayout>
+
+</layout>

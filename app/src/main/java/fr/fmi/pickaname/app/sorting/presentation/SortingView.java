@@ -6,6 +6,6 @@ public interface SortingView {
 
     void displayFirstName(String firstName);
 
-    void displayToast(String message);
+    void displayMessage(String message);
 
 }

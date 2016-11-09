@@ -88,6 +88,11 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
         saveConfiguration(newConfiguration);
     }
 
+    @Override
+    public void reinitializeConfiguration() throws TechnicalException {
+        saveConfiguration(initConfiguration());
+    }
+
     void saveConfiguration(final JsonConfiguration configuration) throws TechnicalException {
         try {
             final String confStr = mapper.writeValueAsString(configuration);

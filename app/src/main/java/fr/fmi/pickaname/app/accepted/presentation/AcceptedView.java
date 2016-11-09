@@ -8,7 +8,7 @@ public interface AcceptedView {
 
     void displayScreenViewModel(AcceptedScreenViewModel viewModel);
 
-    void displayToast(String message);
+    void displayMessage(String message);
 
     void displayFirstNames(List<FirstNameViewModel> firstNameItems);
 }

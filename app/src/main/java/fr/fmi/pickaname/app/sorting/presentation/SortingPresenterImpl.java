@@ -52,12 +52,12 @@ public class SortingPresenterImpl implements SortingPresenter {
 
     @Override
     public void presentAcceptSavingError() {
-        view.displayToast(context.getString(R.string.fragment_sort_accept_error));
+        view.displayMessage(context.getString(R.string.fragment_sort_accept_error));
     }
 
     @Override
     public void presentRefuseSavingError() {
-        view.displayToast(context.getString(R.string.fragment_sort_refuse_error));
+        view.displayMessage(context.getString(R.string.fragment_sort_refuse_error));
     }
 
     private SortingScreenViewModel getViewModel() {

@@ -4,5 +4,5 @@ public interface SettingsView {
 
     void displayViewModel(SettingsScreenViewModel viewModel);
 
-    void displayToast(String message);
+    void displayMessage(String message);
 }

@@ -82,7 +82,7 @@ public class SettingsPresenterImplTest {
         presenter.presentSaveSettingsSuccess();
 
         // Then
-        verify(view, only()).displayToast(messageCaptor.capture());
+        verify(view, only()).displayMessage(messageCaptor.capture());
         assertThat(messageCaptor.getValue()).isEqualTo("OK");
     }
 
@@ -95,7 +95,7 @@ public class SettingsPresenterImplTest {
         presenter.presentSaveSettingsFailure();
 
         // Then
-        verify(view, only()).displayToast(messageCaptor.capture());
+        verify(view, only()).displayMessage(messageCaptor.capture());
         assertThat(messageCaptor.getValue()).isEqualTo("KO");
     }
 

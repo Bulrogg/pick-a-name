@@ -16,4 +16,6 @@ public interface ConfigurationRepository {
     void saveAccept(String firstName) throws TechnicalException;
 
     void saveRefuse(String firstName) throws TechnicalException;
+
+    void reinitializeConfiguration() throws TechnicalException;
 }

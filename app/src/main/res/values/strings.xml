@@ -8,14 +8,13 @@
     <string name="nav_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Pick A Name</string>
     <string name="nav_header_subtitle">A vous de choisir un prénom</string>
-    <string name="nav_sorting">Trier</string>
+    <string name="nav_sorting_title">Les prénoms</string>
+    <string name="nav_sorting">A trier</string>
     <string name="nav_accepted">Retenus</string>
     <string name="nav_refused">Refusés</string>
-    <string name="nav_sorting_title">Les prénoms</string>
     <string name="nav_application">Application</string>
     <string name="nav_settings">Configuration</string>
     <string name="nav_reinitialisation">Réinitialisation</string>
-    <string name="nav_about">A propos</string>
     <string name="nav_feedback">Votre avis</string>
 
     <!-- fragment settings -->
@@ -34,10 +33,18 @@
     <string name="fragment_sort_accept_error">Problème pendant l\'enregistrement</string>
     <string name="fragment_sort_refuse_error">Problème pendant l\'enregistrement</string>
 
-    <!-- other -->
-    <string name="fragment_about_title">A propos</string>
+    <!-- fragment accepted -->
     <string name="fragment_accepted_title">Prénoms retenus</string>
+
+    <!-- fragment rejected -->
     <string name="fragment_rejected_title">Prénoms rejetés</string>
+
+    <!-- fragment feedback-->
     <string name="fragment_feedback_title">Feedback</string>
+
+    <!-- fragment reinitialize -->
+    <string name="fragment_reinit_title">Réinitialisation</string>
+    <string name="fragment_reinit_success">Configuration réinitialisée</string>
+    <string name="fragment_reinit_failed">Erreur pendant la réinitialisation</string>
 
 </resources>

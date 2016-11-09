@@ -41,12 +41,12 @@ public class SettingsPresenterImpl implements SettingsPresenter {
 
     @Override
     public void presentSaveSettingsSuccess() {
-        view.displayToast(context.getString(R.string.fragment_settings_save_success));
+        view.displayMessage(context.getString(R.string.fragment_settings_save_success));
     }
 
     @Override
     public void presentSaveSettingsFailure() {
-        view.displayToast(context.getString(R.string.fragment_settings_save_failure));
+        view.displayMessage(context.getString(R.string.fragment_settings_save_failure));
     }
 
     private SettingsScreenViewModel getViewModel() {

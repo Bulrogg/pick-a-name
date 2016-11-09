@@ -100,7 +100,7 @@ public class SortingPresenterImplTest {
     }
 
     @Test
-    public void presentAcceptSavingError_ShouldCallDisplayToast() throws Exception {
+    public void presentAcceptSavingError_ShouldCallDisplayMessage() throws Exception {
         // Given
         given(context.getString(R.string.fragment_sort_accept_error)).willReturn("TEST MESSAGE");
 
@@ -108,12 +108,12 @@ public class SortingPresenterImplTest {
         presenter.presentAcceptSavingError();
 
         // Then
-        verify(view).displayToast(messageCaptor.capture());
+        verify(view).displayMessage(messageCaptor.capture());
         assertThat(messageCaptor.getValue()).isEqualTo("TEST MESSAGE");
     }
 
     @Test
-    public void presentRefuseSavingError_ShouldCallDisplayToast() throws Exception {
+    public void presentRefuseSavingError_ShouldCallDisplayMessage() throws Exception {
         // Given
         given(context.getString(R.string.fragment_sort_refuse_error)).willReturn("TEST MESSAGE");
 
@@ -121,7 +121,7 @@ public class SortingPresenterImplTest {
         presenter.presentRefuseSavingError();
 
         // Then
-        verify(view).displayToast(messageCaptor.capture());
+        verify(view).displayMessage(messageCaptor.capture());
         assertThat(messageCaptor.getValue()).isEqualTo("TEST MESSAGE");
     }
 }

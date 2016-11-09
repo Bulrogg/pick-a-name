@@ -8,7 +8,7 @@ public interface RejectedView {
 
     void displayScreenViewModel(RejectedScreenViewModel viewModel);
 
-    void displayToast(String message);
+    void displayMessage(String message);
 
     void displayFirstNames(List<FirstNameViewModel> firstNameItems);
 }

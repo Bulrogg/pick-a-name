@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.app.AbstractMainFragment;
-import fr.fmi.pickaname.app.about.AboutFragment;
+import fr.fmi.pickaname.app.reinit.ReinitFragment;
 import fr.fmi.pickaname.app.accepted.AcceptedFragment;
 import fr.fmi.pickaname.app.feedback.FeedbackFragment;
 import fr.fmi.pickaname.app.rejected.RejectedFragment;
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_configuration:
                 loadMainFragment(SettingsFragment.newInstance());
                 break;
-            case R.id.nav_about:
-                loadMainFragment(AboutFragment.newInstance());
+            case R.id.nav_reinit:
+                loadMainFragment(ReinitFragment.newInstance());
                 break;
             case R.id.nav_feedback:
                 loadMainFragment(FeedbackFragment.newInstance());

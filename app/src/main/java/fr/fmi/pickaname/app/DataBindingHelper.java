@@ -14,6 +14,7 @@ import android.widget.ViewFlipper;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
+// TODO Voir les erreur pendant le build "Application namespace for attribute bind:"
 @SuppressWarnings("unused")
 public class DataBindingHelper {
     private DataBindingHelper() {

@@ -223,9 +223,33 @@ public class ConfigurationRepositoryImplTest {
     public void getConfiguration_WhenDeserializationFailed_ShouldThrowAnError() throws Exception {
         // Given
         given(deviceStorage.get("USER_CONFIGURATION_KEY", null)).willReturn("JSON");
-        given(mapper.readValue("JSON", JsonConfiguration.class)).willThrow(TechnicalException.class);
+        given(mapper.readValue("JSON",
+                               JsonConfiguration.class)).willThrow(TechnicalException.class);
 
         // When
         repository.getConfiguration();
+    }
+
+    @Test(expected = TechnicalException.class)
+    public void reinitializeConfiguration_WhenSaveConfigFailed_ShouldThrowAnException() throws Exception {
+        // Given
+        doThrow(TechnicalException.class).when(repository)
+                                         .saveConfiguration(any(JsonConfiguration.class));
+
+        // When
+        repository.reinitializeConfiguration();
+    }
+
+    @Test
+    public void reinitializeConfiguration_WhenSaveConfigSucceed_ShouldReturn() throws Exception {
+        // Given
+
+        // When
+        repository.reinitializeConfiguration();
+
+        // Then
+        final InOrder inOrder = inOrder(repository);
+        inOrder.verify(repository).initConfiguration();
+        inOrder.verify(repository).saveConfiguration(any(JsonConfiguration.class));
     }
 }

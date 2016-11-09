@@ -54,7 +54,7 @@ public class SettingsFragment extends AbstractMainFragment implements SettingsVi
     }
 
     @Override
-    public void displayToast(final String message) {
+    public void displayMessage(final String message) {
         binding.setToastMessage(message);
     }
 

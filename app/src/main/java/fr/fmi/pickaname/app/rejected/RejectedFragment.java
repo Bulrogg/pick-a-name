@@ -62,7 +62,7 @@ public class RejectedFragment extends AbstractMainFragment implements RejectedVi
     }
 
     @Override
-    public void displayToast(String message) {
+    public void displayMessage(String message) {
         binding.setToastMessage(message);
     }
 

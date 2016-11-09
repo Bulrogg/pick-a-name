@@ -59,7 +59,7 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
     }
 
     @Override
-    public void displayToast(final String message) {
+    public void displayMessage(final String message) {
         binding.setToastMessage(message);
     }
 
