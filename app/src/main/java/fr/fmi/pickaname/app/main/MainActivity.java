@@ -19,6 +19,7 @@ import fr.fmi.pickaname.app.settings.SettingsFragment;
 import fr.fmi.pickaname.app.sorting.SortingFragment;
 import fr.fmi.pickaname.databinding.ActivityMainBinding;
 
+// TODO tester le cas ou l'activité est détruite avant la réponse de l'interactor
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
