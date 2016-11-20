@@ -2,6 +2,7 @@ package fr.fmi.pickaname.app.reinit;
 
 import dagger.Component;
 import fr.fmi.pickaname.app.ApplicationComponent;
+import fr.fmi.pickaname.app.PickANameApplication;
 import fr.fmi.pickaname.app.common.SingleIn;
 
 @SingleIn(ReinitComponent.class)
@@ -18,13 +19,12 @@ interface ReinitComponent {
         }
 
         static ReinitComponent init(final ReinitFragment fragment) {
-            // TODO ooo
-            /*return DaggerHomeComponent
+            return DaggerReinitComponent
                     .builder()
-                    .applicationComponent(CosmoApplication.get(activity).getComponent())
-                    .homeModule(new HomeModule())
-                    .build();*/
-            return null;
+                    .applicationComponent(PickANameApplication.get(fragment.getActivity())
+                                                              .getComponent())
+                    .reinitModule(new ReinitModule(fragment))
+                    .build();
         }
     }
 

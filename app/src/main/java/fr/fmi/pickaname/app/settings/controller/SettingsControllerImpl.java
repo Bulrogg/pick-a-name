@@ -1,6 +1,5 @@
 package fr.fmi.pickaname.app.settings.controller;
 
-import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.settings.SettingsInteractor;
 
@@ -18,9 +17,8 @@ public class SettingsControllerImpl implements SettingsController {
     }
 
     @Override
-    public void saveSettings(final SettingsScreenViewModel viewModel) {
-        interactor.saveSettings(Settings.ResearchType.valueOf(viewModel.researchType),
-                                viewModel.lastName);
+    public void saveSettings(final String lastName, final String researchType) {
+        interactor.saveSettings(Settings.ResearchType.valueOf(researchType), lastName);
     }
 
 }

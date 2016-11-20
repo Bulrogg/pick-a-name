@@ -2,6 +2,7 @@ package fr.fmi.pickaname.app.settings;
 
 import dagger.Component;
 import fr.fmi.pickaname.app.ApplicationComponent;
+import fr.fmi.pickaname.app.PickANameApplication;
 import fr.fmi.pickaname.app.common.SingleIn;
 
 @SingleIn(SettingsComponent.class)
@@ -18,13 +19,12 @@ interface SettingsComponent {
         }
 
         static SettingsComponent init(final SettingsFragment fragment) {
-            // TODO ooo
-            /*return DaggerHomeComponent
+            return DaggerSettingsComponent
                     .builder()
-                    .applicationComponent(CosmoApplication.get(activity).getComponent())
-                    .homeModule(new HomeModule())
-                    .build();*/
-            return null;
+                    .applicationComponent(PickANameApplication.get(fragment.getActivity())
+                                                              .getComponent())
+                    .settingsModule(new SettingsModule(fragment))
+                    .build();
         }
     }
 

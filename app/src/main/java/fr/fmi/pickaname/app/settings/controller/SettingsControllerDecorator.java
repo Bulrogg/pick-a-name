@@ -2,8 +2,6 @@ package fr.fmi.pickaname.app.settings.controller;
 
 import java.util.concurrent.Executor;
 
-import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
-
 public class SettingsControllerDecorator implements SettingsController {
 
     private final SettingsController controller;
@@ -29,11 +27,11 @@ public class SettingsControllerDecorator implements SettingsController {
     }
 
     @Override
-    public void saveSettings(final SettingsScreenViewModel viewModel) {
+    public void saveSettings(final String lastName, final String researchType) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                controller.saveSettings(viewModel);
+                controller.saveSettings(lastName, researchType);
             }
         });
     }

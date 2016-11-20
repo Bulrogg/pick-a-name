@@ -1,58 +1,38 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper
+    android:id="@+id/view_flipper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:inAnimation="@android:anim/fade_in"
+    android:outAnimation="@android:anim/fade_out"
+    android:padding="16dp">
 
-    <data>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:indeterminateTintMode="src_in"/>
 
-        <variable
-            name="controller"
-            type="fr.fmi.pickaname.app.rejected.controller.RejectedController"/>
-
-        <variable
-            name="viewModel"
-            type="fr.fmi.pickaname.app.rejected.presentation.RejectedScreenViewModel"/>
-
-        <variable
-            name="toastMessage"
-            type="java.lang.String"/>
-
-    </data>
-
-    <ViewFlipper
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_rejected"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inAnimation="@android:anim/fade_in"
-        android:outAnimation="@android:anim/fade_out"
-        android:padding="16dp"
-        bind:displayedChild="@{viewModel.displayedChild}"
-        bind:toast="@{toastMessage}">
+        android:scrollbars="vertical"/>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/colorAccent"
-            android:indeterminateTintMode="src_in"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:text="Reload TODO"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_rejected"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:text="No first name accepted TODO"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/colorAccent"
-            android:text="Reload TODO"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/colorAccent"
-            android:text="No first name accepted TODO"/>
-
-    </ViewFlipper>
-
-</layout>
+</ViewFlipper>

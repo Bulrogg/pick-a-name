@@ -12,6 +12,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 import fr.fmi.pickaname.MapperModule;
 import fr.fmi.pickaname.app.common.HandlerExecutor;
+import fr.fmi.pickaname.app.main.MainActivity;
+import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 import fr.fmi.pickaname.core.storage.DeviceStorage;
 
@@ -19,6 +21,7 @@ import fr.fmi.pickaname.core.storage.DeviceStorage;
 @Singleton
 @Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
+
 
     final class Initializer {
 
@@ -34,6 +37,8 @@ public interface ApplicationComponent {
         }
 
     }
+
+    void inject(MainActivity mainActivity);
 
     void inject(PickANameApplication cosmoApplication);
 
@@ -52,5 +57,7 @@ public interface ApplicationComponent {
     ObjectMapper objectMapperProvider();
 
     GetFirstNamesRepository getFirstNamesRepositoryProvider();
+
+    ConfigurationRepository configurationRepositoryProvider();
 
 }

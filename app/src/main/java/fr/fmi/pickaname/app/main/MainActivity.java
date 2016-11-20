@@ -1,43 +1,54 @@
 package fr.fmi.pickaname.app.main;
 
 import android.app.FragmentManager;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import butterknife.BindView;
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.common.AbstractMainFragment;
-import fr.fmi.pickaname.app.reinit.ReinitFragment;
+import fr.fmi.pickaname.app.PickANameApplication;
 import fr.fmi.pickaname.app.accepted.AcceptedFragment;
+import fr.fmi.pickaname.app.common.AbstractBaseActivity;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.feedback.FeedbackFragment;
+import fr.fmi.pickaname.app.reinit.ReinitFragment;
 import fr.fmi.pickaname.app.rejected.RejectedFragment;
 import fr.fmi.pickaname.app.settings.SettingsFragment;
 import fr.fmi.pickaname.app.sorting.SortingFragment;
-import fr.fmi.pickaname.databinding.ActivityMainBinding;
 
-// TODO tester le cas ou l'activité est détruite avant la réponse de l'interactor
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AbstractBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ActivityMainBinding binding;
+    @BindView(R.id.navigation) NavigationView navigationView;
+    @BindView(R.id.drawer) DrawerLayout drawer;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
         initToggle();
-        binding.navigation.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void injectDependencies() {
+        PickANameApplication.get(this).getComponent().inject(this);
     }
 
     @Override
     public void onBackPressed() {
-        if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
-            binding.drawer.closeDrawer(GravityCompat.START);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -66,7 +77,7 @@ public class MainActivity extends AppCompatActivity
                 loadMainFragment(FeedbackFragment.newInstance());
                 break;
         }
-        binding.drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -77,13 +88,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initToggle() {
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(toolbar);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                                                                       binding.drawer,
-                                                                       binding.toolbar,
+                                                                       drawer,
+                                                                       toolbar,
                                                                        R.string.nav_drawer_open,
                                                                        R.string.nav_drawer_close);
-        binding.drawer.setDrawerListener(toggle);
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
 }

@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.settings.SettingsInteractor;
 
@@ -19,7 +18,6 @@ import static org.mockito.Mockito.verify;
 public class SettingsControllerImplTest {
 
     @Mock SettingsInteractor interactor;
-    @Mock SettingsScreenViewModel viewModel;
     @InjectMocks SettingsControllerImpl controller;
 
     @Captor ArgumentCaptor<Settings.ResearchType> researchTypeCaptor;
@@ -44,11 +42,11 @@ public class SettingsControllerImplTest {
     @Test
     public void saveSettings_WhenGIRL_ShouldTellTheInteractorToSaveSettings() throws Exception {
         // Given
-        viewModel.lastName = "LAST NAME";
-        viewModel.researchType = "GIRL";
+        final String lastName = "LAST NAME";
+        final String researchType = "GIRL";
 
         // When
-        controller.saveSettings(viewModel);
+        controller.saveSettings(lastName, researchType);
 
         // Then
         verify(interactor).saveSettings(researchTypeCaptor.capture(), lastNameCaptor.capture());
@@ -59,11 +57,11 @@ public class SettingsControllerImplTest {
     @Test
     public void saveSettings_WhenBOY_ShouldTellTheInteractorToSaveSettings() throws Exception {
         // Given
-        viewModel.lastName = "LAST NAME";
-        viewModel.researchType = "BOY";
+        final String lastName = "LAST NAME";
+        final String researchType = "BOY";
 
         // When
-        controller.saveSettings(viewModel);
+        controller.saveSettings(lastName, researchType);
 
         // Then
         verify(interactor).saveSettings(researchTypeCaptor.capture(), lastNameCaptor.capture());
@@ -74,11 +72,11 @@ public class SettingsControllerImplTest {
     @Test
     public void saveSettings_WhenBOTH_ShouldTellTheInteractorToSaveSettings() throws Exception {
         // Given
-        viewModel.lastName = "LAST NAME";
-        viewModel.researchType = "BOTH";
+        final String lastName = "LAST NAME";
+        final String researchType = "BOTH";
 
         // When
-        controller.saveSettings(viewModel);
+        controller.saveSettings(lastName, researchType);
 
         // Then
         verify(interactor).saveSettings(researchTypeCaptor.capture(), lastNameCaptor.capture());

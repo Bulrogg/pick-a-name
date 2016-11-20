@@ -1,9 +1,8 @@
 package fr.fmi.pickaname.app.accepted.presentation;
 
-import android.databinding.BaseObservable;
+public class AcceptedScreenViewModel {
 
-public class AcceptedScreenViewModel extends BaseObservable {
-
+    // TODO move in fragment
     static final int VF_LOADING = 0;
     static final int VF_SUCCESS = 1;
     static final int VF_ERROR = 2;

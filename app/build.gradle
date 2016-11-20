@@ -4,9 +4,6 @@ apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
-    dataBinding{
-        enabled = true
-    }
     defaultConfig {
         applicationId "fr.fmi.pickaname"
         minSdkVersion 21
@@ -49,6 +46,10 @@ dependencies {
     // Dagger
     compile 'com.google.dagger:dagger:2.7'
     apt 'com.google.dagger:dagger-compiler:2.7'
+
+    // Butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // Test
     testCompile 'junit:junit:4.12'
