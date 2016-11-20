@@ -9,52 +9,77 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import fr.fmi.pickaname.MapperModule;
+import fr.fmi.pickaname.app.common.HandlerExecutor;
 import fr.fmi.pickaname.app.storage.DeviceStorageImpl;
+import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 import fr.fmi.pickaname.core.storage.DeviceStorage;
+import fr.fmi.pickaname.repositories.configuration.ConfigurationRepositoryImpl;
 import fr.fmi.pickaname.repositories.firstname.GetFirstNamesRepositoryImpl;
 
-public class ApplicationModule {
+@SuppressWarnings("unused")
+@Module
+final class ApplicationModule {
 
-    private final Context context;
-    private final Executor asyncExecutor;
-    private final MapperModule mapperModule;
-    private final GetFirstNamesRepository getFirstNamesRepository;
+    private final PickANameApplication app;
 
-    public ApplicationModule(final Context context) {
-        this.context = context;
-        this.asyncExecutor = Executors.newSingleThreadExecutor();
-        this.mapperModule = new MapperModule();
-        this.getFirstNamesRepository = new GetFirstNamesRepositoryImpl(mapperModule.getObjectMapper());
+    ApplicationModule(final PickANameApplication app) {
+        this.app = app;
     }
 
-    public Executor getAsyncExecutor() {
-        return asyncExecutor;
+    @Provides
+    public Executor getExecutor() {
+        return Executors.newSingleThreadExecutor();
     }
 
+    @Provides
+    public HandlerExecutor getHandlerExecutor() {
+        return new HandlerExecutor();
+    }
+
+    @Provides
     public Context getContext() {
-        return context;
+        return app;
     }
 
+    @Provides
+    @Singleton
     public MapperModule getMapperModule() {
-        return mapperModule;
+        return new MapperModule();
     }
 
-    public SharedPreferences getSharedPreference() {
+    @Provides
+    public SharedPreferences getSharedPreference(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public DeviceStorage getDeviceStorage() {
-        return new DeviceStorageImpl(getSharedPreference());
+    @Provides
+    public DeviceStorage getDeviceStorage(final SharedPreferences sharedPreferences) {
+        return new DeviceStorageImpl(sharedPreferences);
     }
 
-    public GetFirstNamesRepository getFirstNamesRepository() {
-        return getFirstNamesRepository;
-    }
-
-    public ObjectMapper getObjectMapper() {
+    @Provides
+    public ObjectMapper getObjectMapper(final MapperModule mapperModule) {
         return mapperModule.getObjectMapper();
     }
 
+    @Provides
+    @Singleton
+    public GetFirstNamesRepository getFirstNamesRepository(final ObjectMapper objectMapper) {
+        return new GetFirstNamesRepositoryImpl(objectMapper);
+    }
+
+    @Provides
+    @Singleton
+    ConfigurationRepository provideConfigurationRepository(
+            final DeviceStorage deviceStorage,
+            final ObjectMapper objectMapper
+    ) {
+        return new ConfigurationRepositoryImpl(deviceStorage, objectMapper);
+    }
 }

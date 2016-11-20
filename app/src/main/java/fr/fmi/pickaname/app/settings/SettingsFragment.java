@@ -6,19 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.settings.controller.SettingsController;
 import fr.fmi.pickaname.app.settings.presentation.SettingsView;
 import fr.fmi.pickaname.app.settings.presentation.SettingsScreenViewModel;
 import fr.fmi.pickaname.databinding.FragmentSettingsBinding;
 
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
-
 public class SettingsFragment extends AbstractMainFragment implements SettingsView {
 
+    @Inject SettingsController controller;
+
     private FragmentSettingsBinding binding;
-    private SettingsController controller;
 
     @Override
     public View onCreateView(
@@ -26,8 +27,9 @@ public class SettingsFragment extends AbstractMainFragment implements SettingsVi
             final ViewGroup container,
             final Bundle savedInstanceState
     ) {
-        final SettingsModule module = new SettingsModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
+        // TODO add BaseFragment
+        SettingsComponent.Initializer.init(this).inject(this);
+
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         binding.setController(controller);
         load();

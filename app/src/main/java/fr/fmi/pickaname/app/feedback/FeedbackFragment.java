@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 
 public class FeedbackFragment extends AbstractMainFragment {
 

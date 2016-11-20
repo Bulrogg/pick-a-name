@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.reinit.ReinitFragment;
 import fr.fmi.pickaname.app.accepted.AcceptedFragment;
 import fr.fmi.pickaname.app.feedback.FeedbackFragment;

@@ -10,21 +10,22 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
 import fr.fmi.pickaname.app.accepted.controller.AcceptedController;
 import fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel;
 import fr.fmi.pickaname.app.accepted.presentation.AcceptedView;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.common.firstname.FirstNameAdapter;
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 import fr.fmi.pickaname.databinding.FragmentAcceptedBinding;
 
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
-
 public class AcceptedFragment extends AbstractMainFragment implements AcceptedView {
 
+    @Inject AcceptedController controller;
+
     private FragmentAcceptedBinding binding;
-    private AcceptedController controller;
 
     private final FirstNameAdapter adapter = new FirstNameAdapter();
 
@@ -37,10 +38,12 @@ public class AcceptedFragment extends AbstractMainFragment implements AcceptedVi
             final ViewGroup container,
             final Bundle savedInstanceState
     ) {
-        final AcceptedModule module = new AcceptedModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
+        // TODO add BaseFragment
+        AcceptedComponent.Initializer.init(this).inject(this);
+
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         binding.setController(controller);
+
         initRecyclerView();
         load();
         return binding.getRoot();

@@ -6,19 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
-import fr.fmi.pickaname.app.sorting.controller.SortingController;
-import fr.fmi.pickaname.app.sorting.presentation.SortingView;
-import fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel;
-import fr.fmi.pickaname.databinding.FragmentSortingBinding;
+import javax.inject.Inject;
 
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
+import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
+import fr.fmi.pickaname.app.sorting.controller.SortingController;
+import fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel;
+import fr.fmi.pickaname.app.sorting.presentation.SortingView;
+import fr.fmi.pickaname.databinding.FragmentSortingBinding;
 
 public class SortingFragment extends AbstractMainFragment implements SortingView {
 
+    @Inject SortingController controller;
+
     private FragmentSortingBinding binding;
-    private SortingController controller;
 
     public static SortingFragment newInstance() {
         return new SortingFragment();
@@ -30,10 +31,12 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
             final ViewGroup container,
             final Bundle savedInstanceState
     ) {
-        final SortingModule module = new SortingModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
+        // TODO add BaseFragment
+        SortingComponent.Initializer.init(this).inject(this);
+
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         binding.setController(controller);
+
         load();
         return binding.getRoot();
     }

@@ -1,4 +1,4 @@
-package fr.fmi.pickaname.app;
+package fr.fmi.pickaname.app.common;
 
 import android.databinding.BindingAdapter;
 import android.databinding.InverseBindingAdapter;

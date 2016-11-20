@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.common.firstname.FirstNameAdapter;
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 import fr.fmi.pickaname.app.rejected.controller.RejectedController;
@@ -19,12 +21,11 @@ import fr.fmi.pickaname.app.rejected.presentation.RejectedScreenViewModel;
 import fr.fmi.pickaname.app.rejected.presentation.RejectedView;
 import fr.fmi.pickaname.databinding.FragmentRejectedBinding;
 
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
-
 public class RejectedFragment extends AbstractMainFragment implements RejectedView {
 
+    @Inject RejectedController controller;
+
     private FragmentRejectedBinding binding;
-    private RejectedController controller;
 
     private final FirstNameAdapter adapter = new FirstNameAdapter();
 
@@ -37,8 +38,9 @@ public class RejectedFragment extends AbstractMainFragment implements RejectedVi
             final ViewGroup container,
             final Bundle savedInstanceState
     ) {
-        final RejectedModule module = new RejectedModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
+        // TODO add BaseFragment
+        RejectedComponent.Initializer.init(this).inject(this);
+
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         binding.setController(controller);
         initRecyclerView();

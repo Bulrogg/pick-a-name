@@ -6,18 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.reinit.controller.ReinitController;
 import fr.fmi.pickaname.app.reinit.presentation.ReinitView;
 import fr.fmi.pickaname.databinding.FragmentReinitBinding;
 
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
-
 public class ReinitFragment extends AbstractMainFragment implements ReinitView {
 
+    @Inject ReinitController controller;
+
     private FragmentReinitBinding binding;
-    private ReinitController controller;
 
     public static ReinitFragment newInstance() {
         return new ReinitFragment();
@@ -28,8 +29,9 @@ public class ReinitFragment extends AbstractMainFragment implements ReinitView {
             final ViewGroup container,
             final Bundle savedInstanceState
     ) {
-        final ReinitModule module = new ReinitModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
+        // TODO add BaseFragment
+        ReinitComponent.Initializer.init(this).inject(this);
+
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         binding.setController(controller);
         return binding.getRoot();
