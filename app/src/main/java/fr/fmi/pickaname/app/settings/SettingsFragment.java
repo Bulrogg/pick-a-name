@@ -17,6 +17,10 @@ import fr.fmi.pickaname.app.settings.presentation.SettingsView;
 
 public class SettingsFragment extends AbstractMainFragment implements SettingsView {
 
+    public static final int VF_LOADING = 0;
+    public static final int VF_SUCCESS = 1;
+    public static final int VF_ERROR = 2;
+
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
     @BindView(R.id.last_name_view) TextView lastNameView;
     @BindView(R.id.spinner_research_type) Spinner researchTypeSpinner;

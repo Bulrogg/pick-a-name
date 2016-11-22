@@ -16,6 +16,11 @@ import fr.fmi.pickaname.app.sorting.presentation.SortingView;
 
 public class SortingFragment extends AbstractMainFragment implements SortingView {
 
+    public static final int VF_LOADING = 0;
+    public static final int VF_SUCCESS = 1;
+    public static final int VF_ERROR = 2;
+    public static final int VF_NO_MORE_FIRST_NAME = 3;
+
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
     @BindView(R.id.first_name_view) TextView firstNameView;
     @BindView(R.id.last_name_view) TextView lastNameView;

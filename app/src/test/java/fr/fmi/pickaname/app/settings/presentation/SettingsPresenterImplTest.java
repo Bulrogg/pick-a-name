@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.app.settings.SettingsFragment;
 import fr.fmi.pickaname.core.entities.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +43,7 @@ public class SettingsPresenterImplTest {
 
         // Then
         verify(view, only()).displayViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsScreenViewModel.VF_LOADING);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsFragment.VF_LOADING);
     }
 
     @Test
@@ -56,7 +57,7 @@ public class SettingsPresenterImplTest {
 
         // Then
         verify(view, only()).displayViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsScreenViewModel.VF_SUCCESS);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsFragment.VF_SUCCESS);
         assertThat(viewModelCaptor.getValue().lastName).isEqualTo("LAST NAME");
         assertThat(viewModelCaptor.getValue().researchType).isEqualTo("GIRL");
     }
@@ -70,7 +71,7 @@ public class SettingsPresenterImplTest {
 
         // Then
         verify(view, only()).displayViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsScreenViewModel.VF_ERROR);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SettingsFragment.VF_ERROR);
     }
 
     @Test

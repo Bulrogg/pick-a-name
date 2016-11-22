@@ -3,6 +3,7 @@ package fr.fmi.pickaname.app.sorting.presentation;
 import android.content.Context;
 
 import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.app.sorting.SortingFragment;
 import fr.fmi.pickaname.core.entities.FirstName;
 import fr.fmi.pickaname.core.sort.SortingPresenter;
 
@@ -19,7 +20,7 @@ public class SortingPresenterImpl implements SortingPresenter {
     @Override
     public void presentSortingScreen(final String lastName) {
         final SortingScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingScreenViewModel.VF_SUCCESS;
+        viewModel.displayedChild = SortingFragment.VF_SUCCESS;
         viewModel.lastName = lastName;
         view.displayScreenViewModel(viewModel);
     }
@@ -32,21 +33,21 @@ public class SortingPresenterImpl implements SortingPresenter {
     @Override
     public void presentTechnicalError() {
         final SortingScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingScreenViewModel.VF_ERROR;
+        viewModel.displayedChild = SortingFragment.VF_ERROR;
         view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentLoading() {
         final SortingScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingScreenViewModel.VF_LOADING;
+        viewModel.displayedChild = SortingFragment.VF_LOADING;
         view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentNoMoreFirstName() {
         final SortingScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SortingScreenViewModel.VF_NO_MORE_FIRST_NAME;
+        viewModel.displayedChild = SortingFragment.VF_NO_MORE_FIRST_NAME;
         view.displayScreenViewModel(viewModel);
     }
 

@@ -3,6 +3,7 @@ package fr.fmi.pickaname.app.settings.presentation;
 import android.content.Context;
 
 import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.app.settings.SettingsFragment;
 import fr.fmi.pickaname.core.entities.Settings;
 import fr.fmi.pickaname.core.settings.SettingsPresenter;
 
@@ -19,14 +20,14 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     @Override
     public void presentLoading() {
         final SettingsScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SettingsScreenViewModel.VF_LOADING;
+        viewModel.displayedChild = SettingsFragment.VF_LOADING;
         view.displayViewModel(viewModel);
     }
 
     @Override
     public void presentSettings(final Settings settings) {
         final SettingsScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SettingsScreenViewModel.VF_SUCCESS;
+        viewModel.displayedChild = SettingsFragment.VF_SUCCESS;
         viewModel.lastName = settings.getLastName();
         viewModel.researchType = settings.getResearchType().name();
         view.displayViewModel(viewModel);
@@ -35,7 +36,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     @Override
     public void presentLoadingFailure() {
         final SettingsScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = SettingsScreenViewModel.VF_ERROR;
+        viewModel.displayedChild = SettingsFragment.VF_ERROR;
         view.displayViewModel(viewModel);
     }
 

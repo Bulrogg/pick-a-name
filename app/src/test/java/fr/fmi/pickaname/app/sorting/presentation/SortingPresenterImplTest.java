@@ -11,12 +11,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.app.sorting.SortingFragment;
 import fr.fmi.pickaname.core.entities.FirstName;
 
-import static fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel.VF_ERROR;
-import static fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel.VF_LOADING;
-import static fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel.VF_NO_MORE_FIRST_NAME;
-import static fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel.VF_SUCCESS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -47,7 +44,7 @@ public class SortingPresenterImplTest {
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
         assertThat(viewModelCaptor.getValue().lastName).isEqualTo("LAST NAME");
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_SUCCESS);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SortingFragment.VF_SUCCESS);
     }
 
     @Test
@@ -72,7 +69,7 @@ public class SortingPresenterImplTest {
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_ERROR);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SortingFragment.VF_ERROR);
     }
 
     @Test
@@ -84,7 +81,7 @@ public class SortingPresenterImplTest {
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_LOADING);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SortingFragment.VF_LOADING);
     }
 
     @Test
@@ -96,7 +93,7 @@ public class SortingPresenterImplTest {
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_NO_MORE_FIRST_NAME);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(SortingFragment.VF_NO_MORE_FIRST_NAME);
     }
 
     @Test

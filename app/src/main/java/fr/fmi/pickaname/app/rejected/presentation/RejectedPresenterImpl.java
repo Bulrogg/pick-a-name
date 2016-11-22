@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
+import fr.fmi.pickaname.app.rejected.RejectedFragment;
 import fr.fmi.pickaname.core.rejected.RejectedPresenter;
 
 public class RejectedPresenterImpl implements RejectedPresenter {
@@ -17,14 +18,14 @@ public class RejectedPresenterImpl implements RejectedPresenter {
     @Override
     public void presentLoading() {
         final RejectedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = RejectedScreenViewModel.VF_LOADING;
+        viewModel.displayedChild = RejectedFragment.VF_LOADING;
         view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentFirstNames(final List<String> firstNames, final String lastNames) {
         final RejectedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = RejectedScreenViewModel.VF_SUCCESS;
+        viewModel.displayedChild = RejectedFragment.VF_SUCCESS;
         view.displayScreenViewModel(viewModel);
         view.displayFirstNames(prepareFirstNameViewModels(firstNames, lastNames));
     }
@@ -32,14 +33,14 @@ public class RejectedPresenterImpl implements RejectedPresenter {
     @Override
     public void presentNoFirstNameRejected() {
         final RejectedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = RejectedScreenViewModel.VF_NO_FIRST_NAME_REJECTED;
+        viewModel.displayedChild = RejectedFragment.VF_NO_FIRST_NAME_REJECTED;
         view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentLoadingFailure() {
         final RejectedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = RejectedScreenViewModel.VF_ERROR;
+        viewModel.displayedChild = RejectedFragment.VF_ERROR;
         view.displayScreenViewModel(viewModel);
     }
 

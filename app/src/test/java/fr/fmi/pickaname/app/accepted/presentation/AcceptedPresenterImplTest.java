@@ -15,12 +15,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.fmi.pickaname.app.accepted.AcceptedFragment;
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_ERROR;
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_LOADING;
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_NO_FIRST_NAME_ACCEPTED;
-import static fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel.VF_SUCCESS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
@@ -47,7 +44,7 @@ public class AcceptedPresenterImplTest {
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_LOADING);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(AcceptedFragment.VF_LOADING);
     }
 
     @Test
@@ -63,7 +60,7 @@ public class AcceptedPresenterImplTest {
         final InOrder inOrder = BDDMockito.inOrder(view);
         inOrder.verify(view).displayScreenViewModel(viewModelCaptor.capture());
         inOrder.verify(view).displayFirstNames(itemsViewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_SUCCESS);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(AcceptedFragment.VF_SUCCESS);
         assertThat(itemsViewModelCaptor.getValue()).hasSize(2);
         assertThat(itemsViewModelCaptor.getValue().get(0).firstName).isEqualTo("A");
         assertThat(itemsViewModelCaptor.getValue().get(0).lastName).isEqualTo("LAST NAME");
@@ -78,7 +75,7 @@ public class AcceptedPresenterImplTest {
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_NO_FIRST_NAME_ACCEPTED);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(AcceptedFragment.VF_NO_FIRST_NAME_ACCEPTED);
     }
 
     @Test
@@ -90,7 +87,7 @@ public class AcceptedPresenterImplTest {
 
         // Then
         verify(view).displayScreenViewModel(viewModelCaptor.capture());
-        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(VF_ERROR);
+        assertThat(viewModelCaptor.getValue().displayedChild).isEqualTo(AcceptedFragment.VF_ERROR);
     }
 
 }

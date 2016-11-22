@@ -3,6 +3,7 @@ package fr.fmi.pickaname.app.accepted.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.fmi.pickaname.app.accepted.AcceptedFragment;
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
 import fr.fmi.pickaname.core.accepted.AcceptedPresenter;
 
@@ -17,14 +18,14 @@ public class AcceptedPresenterImpl implements AcceptedPresenter {
     @Override
     public void presentLoading() {
         final AcceptedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = AcceptedScreenViewModel.VF_LOADING;
+        viewModel.displayedChild = AcceptedFragment.VF_LOADING;
         view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentFirstNames(final List<String> firstNames, final String lastNames) {
         final AcceptedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = AcceptedScreenViewModel.VF_SUCCESS;
+        viewModel.displayedChild = AcceptedFragment.VF_SUCCESS;
         view.displayScreenViewModel(viewModel);
         view.displayFirstNames(prepareFirstNameViewModels(firstNames, lastNames));
     }
@@ -32,14 +33,14 @@ public class AcceptedPresenterImpl implements AcceptedPresenter {
     @Override
     public void presentNoFirstNameAccepted() {
         final AcceptedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = AcceptedScreenViewModel.VF_NO_FIRST_NAME_ACCEPTED;
+        viewModel.displayedChild = AcceptedFragment.VF_NO_FIRST_NAME_ACCEPTED;
         view.displayScreenViewModel(viewModel);
     }
 
     @Override
     public void presentLoadingFailure() {
         final AcceptedScreenViewModel viewModel = getViewModel();
-        viewModel.displayedChild = AcceptedScreenViewModel.VF_ERROR;
+        viewModel.displayedChild = AcceptedFragment.VF_ERROR;
         view.displayScreenViewModel(viewModel);
     }
 

@@ -20,6 +20,11 @@ import fr.fmi.pickaname.app.rejected.presentation.RejectedView;
 
 public class RejectedFragment extends AbstractMainFragment implements RejectedView {
 
+    public static final int VF_LOADING = 0;
+    public static final int VF_SUCCESS = 1;
+    public static final int VF_ERROR = 2;
+    public static final int VF_NO_FIRST_NAME_REJECTED = 3;
+
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
     @BindView(R.id.recycler_rejected) RecyclerView recyclerRejectedView;
 
