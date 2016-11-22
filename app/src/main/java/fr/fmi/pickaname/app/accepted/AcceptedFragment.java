@@ -1,49 +1,35 @@
 package fr.fmi.pickaname.app.accepted;
 
-import android.databinding.DataBindingUtil;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
 import fr.fmi.pickaname.app.accepted.controller.AcceptedController;
 import fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel;
 import fr.fmi.pickaname.app.accepted.presentation.AcceptedView;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.common.firstname.FirstNameAdapter;
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
-import fr.fmi.pickaname.databinding.FragmentAcceptedBinding;
-
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
 
 public class AcceptedFragment extends AbstractMainFragment implements AcceptedView {
 
-    private FragmentAcceptedBinding binding;
-    private AcceptedController controller;
+    @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
+    @BindView(R.id.recycler_accepted) RecyclerView recyclerAcceptedView;
+
+    @Inject AcceptedController controller;
+    @Inject AcceptedViewDecorator viewDecorator;
 
     private final FirstNameAdapter adapter = new FirstNameAdapter();
 
     public static AcceptedFragment newInstance() {
         return new AcceptedFragment();
-    }
-
-    public View onCreateView(
-            final LayoutInflater inflater,
-            final ViewGroup container,
-            final Bundle savedInstanceState
-    ) {
-        final AcceptedModule module = new AcceptedModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        binding.setController(controller);
-        initRecyclerView();
-        load();
-        return binding.getRoot();
     }
 
     @Override
@@ -52,13 +38,32 @@ public class AcceptedFragment extends AbstractMainFragment implements AcceptedVi
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutResId() {
         return R.layout.fragment_accepted;
     }
 
     @Override
+    protected void injectDependencies() {
+        AcceptedComponent.Initializer.init(this).inject(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewDecorator.setAcceptedView(this);
+        initRecyclerView();
+        load();
+    }
+
+    @Override
+    public void onStop() {
+        viewDecorator.setAcceptedView(null);
+        super.onStop();
+    }
+
+    @Override
     public void displayScreenViewModel(final AcceptedScreenViewModel viewModel) {
-        binding.setViewModel(viewModel);
+        viewFlipper.setDisplayedChild(viewModel.displayedChild);
     }
 
     @Override
@@ -68,7 +73,7 @@ public class AcceptedFragment extends AbstractMainFragment implements AcceptedVi
 
     @Override
     public void displayMessage(final String message) {
-        binding.setToastMessage(message);
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     private void load() {
@@ -77,9 +82,8 @@ public class AcceptedFragment extends AbstractMainFragment implements AcceptedVi
 
     private void initRecyclerView() {
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        binding.recyclerAccepted.setHasFixedSize(true);
-        binding.recyclerAccepted.setLayoutManager(layoutManager);
-        binding.recyclerAccepted.setAdapter(adapter);
+        recyclerAcceptedView.setHasFixedSize(true);
+        recyclerAcceptedView.setLayoutManager(layoutManager);
+        recyclerAcceptedView.setAdapter(adapter);
     }
-
 }

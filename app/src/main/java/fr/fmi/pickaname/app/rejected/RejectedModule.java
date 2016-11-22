@@ -1,39 +1,64 @@
 package fr.fmi.pickaname.app.rejected;
 
-import fr.fmi.pickaname.app.ApplicationModule;
+import com.nicolasmouchel.executordecorator.ExecutorDecorator;
+
+import java.util.concurrent.Executor;
+
+import dagger.Module;
+import dagger.Provides;
+import fr.fmi.pickaname.app.common.HandlerExecutor;
+import fr.fmi.pickaname.app.common.SingleIn;
 import fr.fmi.pickaname.app.rejected.controller.RejectedController;
-import fr.fmi.pickaname.app.rejected.controller.RejectedControllerDecorator;
 import fr.fmi.pickaname.app.rejected.controller.RejectedControllerImpl;
 import fr.fmi.pickaname.app.rejected.presentation.RejectedPresenterImpl;
 import fr.fmi.pickaname.app.rejected.presentation.RejectedView;
 import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.rejected.RejectedInteractor;
 import fr.fmi.pickaname.core.rejected.RejectedPresenter;
-import fr.fmi.pickaname.repositories.configuration.ConfigurationRepositoryImpl;
 
-public class RejectedModule {
+@SuppressWarnings("unused")
+@Module
+class RejectedModule {
 
-    private final ApplicationModule appModule;
-    private final RejectedView view;
-
-    public RejectedModule(final ApplicationModule appModule, final RejectedView view) {
-        this.appModule = appModule;
-        this.view = view;
+    RejectedModule() {
     }
 
-    public RejectedController getController() {
-        final RejectedInteractor interactor = new RejectedInteractor(getPresenter(),
-                                                                     getConfigurationRepository());
+    @Provides
+    @SingleIn(RejectedComponent.class)
+    @ExecutorDecorator(mutable = true)
+    RejectedView providesView(final RejectedViewDecorator decorator) {
+        return decorator;
+    }
+
+    @Provides
+    @SingleIn(RejectedComponent.class)
+    RejectedViewDecorator providesViewDecorator(final HandlerExecutor handlerExecutor) {
+        return new RejectedViewDecorator(handlerExecutor);
+    }
+
+    @Provides
+    @SingleIn(RejectedComponent.class)
+    RejectedPresenter providePresenter(final RejectedView view) {
+        return new RejectedPresenterImpl(view);
+    }
+
+    @Provides
+    @SingleIn(RejectedComponent.class)
+    RejectedInteractor provideInteractor(
+            final RejectedPresenter presenter,
+            final ConfigurationRepository configurationRepository
+    ) {
+        return new RejectedInteractor(presenter, configurationRepository);
+    }
+
+    @Provides
+    @SingleIn(RejectedComponent.class)
+    @ExecutorDecorator
+    RejectedController providesController(
+            final RejectedInteractor interactor,
+            final Executor executor
+    ) {
         final RejectedController controller = new RejectedControllerImpl(interactor);
-        return new RejectedControllerDecorator(controller, appModule.getAsyncExecutor());
-    }
-
-    private ConfigurationRepository getConfigurationRepository() {
-        return new ConfigurationRepositoryImpl(appModule.getDeviceStorage(),
-                                               appModule.getObjectMapper());
-    }
-
-    private RejectedPresenter getPresenter() {
-        return new RejectedPresenterImpl(view, appModule.getContext());
+        return new RejectedControllerDecorator(executor, controller);
     }
 }

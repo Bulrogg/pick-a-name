@@ -1,38 +1,22 @@
 package fr.fmi.pickaname.app.reinit;
 
-import android.databinding.DataBindingUtil;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import butterknife.OnClick;
 import fr.fmi.pickaname.R;
-import fr.fmi.pickaname.app.AbstractMainFragment;
+import fr.fmi.pickaname.app.common.AbstractMainFragment;
 import fr.fmi.pickaname.app.reinit.controller.ReinitController;
 import fr.fmi.pickaname.app.reinit.presentation.ReinitView;
-import fr.fmi.pickaname.databinding.FragmentReinitBinding;
-
-import static fr.fmi.pickaname.app.PickANameApplication.getApplicationModule;
 
 public class ReinitFragment extends AbstractMainFragment implements ReinitView {
 
-    private FragmentReinitBinding binding;
-    private ReinitController controller;
+    @Inject ReinitController controller;
+    @Inject ReinitViewDecorator viewDecorator;
 
     public static ReinitFragment newInstance() {
         return new ReinitFragment();
-    }
-
-    public View onCreateView(
-            final LayoutInflater inflater,
-            final ViewGroup container,
-            final Bundle savedInstanceState
-    ) {
-        final ReinitModule module = new ReinitModule(getApplicationModule(getActivity()), this);
-        controller = module.getController();
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        binding.setController(controller);
-        return binding.getRoot();
     }
 
     @Override
@@ -41,12 +25,35 @@ public class ReinitFragment extends AbstractMainFragment implements ReinitView {
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutResId() {
         return R.layout.fragment_reinit;
     }
 
     @Override
+    protected void injectDependencies() {
+        ReinitComponent.Initializer.init(this).inject(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewDecorator.setReinitView(this);
+    }
+
+    @Override
+    public void onStop() {
+        viewDecorator.setReinitView(null);
+        super.onStop();
+    }
+
+    @Override
     public void displayMessage(final String message) {
-        binding.setToastMessage(message);
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @SuppressWarnings("unused")
+    @OnClick(R.id.reinit_button)
+    public void reinitClickHandler() {
+        controller.reinitialize();
     }
 }

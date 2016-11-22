@@ -1,17 +1,36 @@
 package fr.fmi.pickaname.app.common.firstname;
 
-import android.databinding.DataBindingUtil;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
-import fr.fmi.pickaname.databinding.FirstNameItemBinding;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.fmi.pickaname.R;
+import fr.fmi.pickaname.app.common.BinderViewHolder;
 
-class FirstNameViewHolder extends RecyclerView.ViewHolder {
+public class FirstNameViewHolder extends BinderViewHolder<FirstNameViewModel> {
 
-    public FirstNameItemBinding binding;
+    @BindView(R.id.first_name_view) TextView firstNameView;
+    @BindView(R.id.last_name_view) TextView lastNameView;
 
-    public FirstNameViewHolder(final View itemView) {
+    private FirstNameViewHolder(final View itemView) {
         super(itemView);
-        binding = DataBindingUtil.bind(itemView);
+    }
+
+    public static FirstNameViewHolder newInstance(final View itemView) {
+        final FirstNameViewHolder viewHolder = new FirstNameViewHolder(itemView);
+        ButterKnife.bind(viewHolder, itemView);
+        return viewHolder;
+    }
+
+    @Override
+    protected Class<FirstNameViewModel> getClassType() {
+        return FirstNameViewModel.class;
+    }
+
+    @Override
+    protected void bind(final FirstNameViewModel firstNameViewModel) {
+        firstNameView.setText(firstNameViewModel.firstName);
+        lastNameView.setText(firstNameViewModel.lastName);
     }
 }

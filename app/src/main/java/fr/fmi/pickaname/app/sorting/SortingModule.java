@@ -1,41 +1,68 @@
 package fr.fmi.pickaname.app.sorting;
 
-import fr.fmi.pickaname.app.ApplicationModule;
+import android.content.Context;
+
+import com.nicolasmouchel.executordecorator.ExecutorDecorator;
+
+import java.util.concurrent.Executor;
+
+import dagger.Module;
+import dagger.Provides;
+import fr.fmi.pickaname.app.common.HandlerExecutor;
+import fr.fmi.pickaname.app.common.SingleIn;
 import fr.fmi.pickaname.app.sorting.controller.SortingController;
-import fr.fmi.pickaname.app.sorting.controller.SortingControllerDecorator;
 import fr.fmi.pickaname.app.sorting.controller.SortingControllerImpl;
 import fr.fmi.pickaname.app.sorting.presentation.SortingPresenterImpl;
 import fr.fmi.pickaname.app.sorting.presentation.SortingView;
 import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
+import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 import fr.fmi.pickaname.core.sort.SortingInteractor;
 import fr.fmi.pickaname.core.sort.SortingPresenter;
-import fr.fmi.pickaname.repositories.configuration.ConfigurationRepositoryImpl;
 
+@SuppressWarnings("unused")
+@Module
+class SortingModule {
 
-public class SortingModule {
-
-    private final ApplicationModule appModule;
-    private final SortingView view;
-
-    public SortingModule(final ApplicationModule appModule, final SortingView view) {
-        this.appModule = appModule;
-        this.view = view;
+    SortingModule() {
     }
 
-    public SortingController getController() {
-        final SortingInteractor interactor = new SortingInteractor(getPresenter(),
-                                                                   appModule.getFirstNamesRepository(),
-                                                                   getConfigurationRepository());
+    @Provides
+    @SingleIn(SortingComponent.class)
+    @ExecutorDecorator(mutable = true)
+    SortingView providesView(final SortingViewDecorator decorator) {
+        return decorator;
+    }
+
+    @Provides
+    @SingleIn(SortingComponent.class)
+    SortingViewDecorator providesViewDecorator(final HandlerExecutor handlerExecutor) {
+        return new SortingViewDecorator(handlerExecutor);
+    }
+
+    @Provides
+    @SingleIn(SortingComponent.class)
+    SortingPresenter providePresenter(final SortingView view, final Context context) {
+        return new SortingPresenterImpl(view, context);
+    }
+
+    @Provides
+    @SingleIn(SortingComponent.class)
+    SortingInteractor provideInteractor(
+            final SortingPresenter presenter,
+            final GetFirstNamesRepository getFirstNamesRepository,
+            final ConfigurationRepository configurationRepository
+    ) {
+        return new SortingInteractor(presenter, getFirstNamesRepository, configurationRepository);
+    }
+
+    @Provides
+    @SingleIn(SortingComponent.class)
+    @ExecutorDecorator
+    SortingController providesController(
+            final SortingInteractor interactor,
+            final Executor executor
+    ) {
         final SortingController controller = new SortingControllerImpl(interactor);
-        return new SortingControllerDecorator(controller, appModule.getAsyncExecutor());
-    }
-
-    private ConfigurationRepository getConfigurationRepository() {
-        return new ConfigurationRepositoryImpl(appModule.getDeviceStorage(),
-                                               appModule.getObjectMapper());
-    }
-
-    private SortingPresenter getPresenter() {
-        return new SortingPresenterImpl(view, appModule.getContext());
+        return new SortingControllerDecorator(executor, controller);
     }
 }

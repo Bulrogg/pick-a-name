@@ -1,97 +1,76 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+<ViewFlipper
+    android:id="@+id/view_flipper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:inAnimation="@android:anim/fade_in"
+    android:outAnimation="@android:anim/fade_out"
+    android:padding="16dp">
 
-    <data>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:indeterminateTintMode="src_in"/>
 
-        <variable
-            name="controller"
-            type="fr.fmi.pickaname.app.sorting.controller.SortingController"/>
-
-        <variable
-            name="viewModel"
-            type="fr.fmi.pickaname.app.sorting.presentation.SortingScreenViewModel"/>
-
-        <variable
-            name="firstName"
-            type="java.lang.String"/>
-
-        <variable
-            name="toastMessage"
-            type="java.lang.String"/>
-    </data>
-
-    <ViewFlipper
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inAnimation="@android:anim/fade_in"
-        android:outAnimation="@android:anim/fade_out"
-        android:padding="16dp"
-        bind:displayedChild="@{viewModel.displayedChild}"
-        bind:toast="@{toastMessage}">
+        android:orientation="vertical">
 
-        <ProgressBar
+        <TextView
+            android:id="@+id/first_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminateTint="@color/colorAccent"
-            android:indeterminateTintMode="src_in"/>
+            tools:text="Frédéric"/>
+
+        <TextView
+            android:id="@+id/last_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            tools:text="Millard"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
+            <Button
+                android:id="@+id/accept_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/colorAccent"
-                android:text="@{firstName}"/>
+                android:text="Oui"/>
 
-            <TextView
+            <Button
+                android:id="@+id/refuse_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/colorAccent"
-                android:text="@{viewModel.lastName}"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->controller.accept(firstName)}"
-                    android:text="Oui"/>
-
-                <Button
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->controller.refuse(firstName)}"
-                    android:text="Non"/>
-
-            </LinearLayout>
+                android:text="Non"/>
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/colorAccent"
-            android:text="Reload TODO"/>
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/colorAccent"
-            android:text="No more first name to propose"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:text="Reload TODO"/>
 
-    </ViewFlipper>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:text="No more first name to propose"/>
 
-</layout>
+</ViewFlipper>

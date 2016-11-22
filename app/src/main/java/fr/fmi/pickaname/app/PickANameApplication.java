@@ -5,20 +5,21 @@ import android.content.Context;
 
 public class PickANameApplication extends Application {
 
-    private ApplicationModule applicationModule;
+    private ApplicationComponent component;
 
-    public static ApplicationModule getApplicationModule(final Context context) {
-        final Context applicationContext = context.getApplicationContext();
-        return ((PickANameApplication) applicationContext).getApplicationModule();
+    public static PickANameApplication get(final Context context) {
+        return (PickANameApplication) context.getApplicationContext();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationModule = new ApplicationModule(this);
+        component = ApplicationComponent.Initializer.init(this);
+        component.inject(this);
     }
 
-    public ApplicationModule getApplicationModule() {
-        return applicationModule;
+    public ApplicationComponent getComponent() {
+        return component;
     }
+
 }

@@ -1,7 +1,5 @@
 package fr.fmi.pickaname.app.accepted.presentation;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +9,9 @@ import fr.fmi.pickaname.core.accepted.AcceptedPresenter;
 public class AcceptedPresenterImpl implements AcceptedPresenter {
 
     private final AcceptedView view;
-    private final Context context;
 
-    public AcceptedPresenterImpl(final AcceptedView view, final Context context) {
+    public AcceptedPresenterImpl(final AcceptedView view) {
         this.view = view;
-        this.context = context;
     }
 
     @Override
