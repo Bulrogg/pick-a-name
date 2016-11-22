@@ -21,7 +21,6 @@ public abstract class AbstractMainFragment extends Fragment {
         final View view = inflater.inflate(getLayoutResId(), container, false);
         bindView(view);
         injectDependencies();
-        init();
         return view;
     }
 
@@ -34,10 +33,6 @@ public abstract class AbstractMainFragment extends Fragment {
     int getLayoutResId();
 
     protected abstract void injectDependencies();
-
-    // TODO ooo remove
-    @Deprecated
-    public abstract void init();
 
     protected void bindView(final View view) {
         ButterKnife.bind(this, view);

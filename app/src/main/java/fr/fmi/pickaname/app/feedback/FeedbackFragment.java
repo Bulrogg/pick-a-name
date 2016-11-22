@@ -22,8 +22,4 @@ public class FeedbackFragment extends AbstractMainFragment {
     @Override
     protected void injectDependencies() {
     }
-
-    @Override
-    public void init() {
-    }
 }

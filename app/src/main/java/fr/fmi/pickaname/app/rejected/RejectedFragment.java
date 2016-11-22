@@ -24,6 +24,7 @@ public class RejectedFragment extends AbstractMainFragment implements RejectedVi
     @BindView(R.id.recycler_rejected) RecyclerView recyclerRejectedView;
 
     @Inject RejectedController controller;
+    @Inject RejectedViewDecorator viewDecorator;
 
     private final FirstNameAdapter adapter = new FirstNameAdapter();
 
@@ -47,9 +48,17 @@ public class RejectedFragment extends AbstractMainFragment implements RejectedVi
     }
 
     @Override
-    public void init() {
+    public void onStart() {
+        super.onStart();
+        viewDecorator.setRejectedView(this);
         initRecyclerView();
         load();
+    }
+
+    @Override
+    public void onStop() {
+        viewDecorator.setRejectedView(null);
+        super.onStop();
     }
 
     @Override

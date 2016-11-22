@@ -1,24 +1,17 @@
 package fr.fmi.pickaname.app.rejected.presentation;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.fmi.pickaname.app.accepted.presentation.AcceptedScreenViewModel;
-import fr.fmi.pickaname.app.accepted.presentation.AcceptedView;
 import fr.fmi.pickaname.app.common.firstname.FirstNameViewModel;
-import fr.fmi.pickaname.core.accepted.AcceptedPresenter;
 import fr.fmi.pickaname.core.rejected.RejectedPresenter;
 
 public class RejectedPresenterImpl implements RejectedPresenter {
 
     private final RejectedView view;
-    private final Context context;
 
-    public RejectedPresenterImpl(final RejectedView view, final Context context) {
+    public RejectedPresenterImpl(final RejectedView view) {
         this.view = view;
-        this.context = context;
     }
 
     @Override

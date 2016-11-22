@@ -13,6 +13,7 @@ import fr.fmi.pickaname.app.reinit.presentation.ReinitView;
 public class ReinitFragment extends AbstractMainFragment implements ReinitView {
 
     @Inject ReinitController controller;
+    @Inject ReinitViewDecorator viewDecorator;
 
     public static ReinitFragment newInstance() {
         return new ReinitFragment();
@@ -34,7 +35,15 @@ public class ReinitFragment extends AbstractMainFragment implements ReinitView {
     }
 
     @Override
-    public void init() {
+    public void onStart() {
+        super.onStart();
+        viewDecorator.setReinitView(this);
+    }
+
+    @Override
+    public void onStop() {
+        viewDecorator.setReinitView(null);
+        super.onStop();
     }
 
     @Override

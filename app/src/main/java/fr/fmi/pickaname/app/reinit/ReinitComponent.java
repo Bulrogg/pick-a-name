@@ -23,7 +23,7 @@ interface ReinitComponent {
                     .builder()
                     .applicationComponent(PickANameApplication.get(fragment.getActivity())
                                                               .getComponent())
-                    .reinitModule(new ReinitModule(fragment))
+                    .reinitModule(new ReinitModule())
                     .build();
         }
     }

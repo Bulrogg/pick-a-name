@@ -16,11 +16,12 @@ import fr.fmi.pickaname.app.sorting.presentation.SortingView;
 
 public class SortingFragment extends AbstractMainFragment implements SortingView {
 
-    @Inject SortingController controller;
-
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
     @BindView(R.id.first_name_view) TextView firstNameView;
     @BindView(R.id.last_name_view) TextView lastNameView;
+
+    @Inject SortingController controller;
+    @Inject SortingViewDecorator viewDecorator;
 
     public static SortingFragment newInstance() {
         return new SortingFragment();
@@ -42,8 +43,16 @@ public class SortingFragment extends AbstractMainFragment implements SortingView
     }
 
     @Override
-    public void init() {
+    public void onStart() {
+        super.onStart();
+        viewDecorator.setSortingView(this);
         load();
+    }
+
+    @Override
+    public void onStop() {
+        viewDecorator.setSortingView(null);
+        super.onStop();
     }
 
     @Override

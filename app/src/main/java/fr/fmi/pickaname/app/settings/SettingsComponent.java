@@ -23,7 +23,7 @@ interface SettingsComponent {
                     .builder()
                     .applicationComponent(PickANameApplication.get(fragment.getActivity())
                                                               .getComponent())
-                    .settingsModule(new SettingsModule(fragment))
+                    .settingsModule(new SettingsModule())
                     .build();
         }
     }

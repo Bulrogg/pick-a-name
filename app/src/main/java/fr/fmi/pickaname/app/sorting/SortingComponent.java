@@ -23,7 +23,7 @@ interface SortingComponent {
                     .builder()
                     .applicationComponent(PickANameApplication.get(fragment.getActivity())
                                                               .getComponent())
-                    .sortingModule(new SortingModule(fragment))
+                    .sortingModule(new SortingModule())
                     .build();
         }
     }

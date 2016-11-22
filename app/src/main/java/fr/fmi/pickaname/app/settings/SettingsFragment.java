@@ -22,6 +22,7 @@ public class SettingsFragment extends AbstractMainFragment implements SettingsVi
     @BindView(R.id.spinner_research_type) Spinner researchTypeSpinner;
 
     @Inject SettingsController controller;
+    @Inject SettingsViewDecorator viewDecorator;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -43,8 +44,16 @@ public class SettingsFragment extends AbstractMainFragment implements SettingsVi
     }
 
     @Override
-    public void init() {
+    public void onStart() {
+        super.onStart();
+        viewDecorator.setSettingsView(this);
         load();
+    }
+
+    @Override
+    public void onStop() {
+        viewDecorator.setSettingsView(null);
+        super.onStop();
     }
 
     @Override

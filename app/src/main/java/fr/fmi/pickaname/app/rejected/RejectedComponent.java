@@ -23,7 +23,7 @@ interface RejectedComponent {
                     .builder()
                     .applicationComponent(PickANameApplication.get(fragment.getActivity())
                                                               .getComponent())
-                    .rejectedModule(new RejectedModule(fragment))
+                    .rejectedModule(new RejectedModule())
                     .build();
         }
     }
