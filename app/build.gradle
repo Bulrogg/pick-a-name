@@ -1,26 +1,32 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+
+    compileSdkVersion parent.ext.androidTargetSdkVersion
+    buildToolsVersion parent.ext.androidBuildToolsVersion
+
     defaultConfig {
+        minSdkVersion parent.ext.androidMinSdkVersion
+        targetSdkVersion parent.ext.androidTargetSdkVersion
+
         applicationId "fr.fmi.pickaname"
-        minSdkVersion 21
-        targetSdkVersion 24
+
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'
@@ -40,26 +46,24 @@ dependencies {
     compile project(path: ':repositories')
 
     // Android
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    compile parent.ext.supportAppCompat
+    compile parent.ext.supportDesign
 
     // Dagger
-    compile 'com.google.dagger:dagger:2.7'
-    apt 'com.google.dagger:dagger-compiler:2.7'
+    compile parent.ext.dagger
+    annotationProcessor parent.ext.daggerCompiler
 
     // Executor Generator
-    compile 'com.nicolasmouchel:executordecorator-annotations:1.0'
-    apt 'com.nicolasmouchel:executordecorator-compiler:1.0'
+    compile parent.ext.executorDecoratorAnnotation
+    annotationProcessor parent.ext.executorDecoratorCompiler
 
     // Butterknife
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile parent.ext.butterknife
+    annotationProcessor parent.ext.butterknifeCompiler
 
     // Test
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.1.0-RC.1'
-    testCompile 'de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1'
-    testCompile 'org.assertj:assertj-core:1.7.1'
-    testCompile 'org.robolectric:robolectric:3.1.2'
-    testCompile 'org.robolectric:shadows-support-v4:3.1.2'
+    testCompile parent.ext.junit
+    testCompile parent.ext.mockito
+    testCompile parent.ext.hierarchicalcontextrunner
+    testCompile parent.ext.assertj
 }

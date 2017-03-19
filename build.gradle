@@ -6,15 +6,63 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://clojars.org/repo/" }
+    }
+
+    ext {
+        // Android sdk version
+        androidMinSdkVersion = 23
+        androidTargetSdkVersion = 25
+        androidBuildToolsVersion = '25.0.2'
+
+        // Android
+        supportVersion = '24.2.1'
+        supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
+        supportDesign =  "com.android.support:design:$supportVersion"
+
+        // Auto value
+        autoValueVersion = '1.2'
+        autoValueApt = "com.google.auto.value:auto-value:$autoValueVersion"
+        autoValue = "com.google.auto.value:auto-value:$autoValueVersion"
+
+        // Dagger
+        daggerVersion = '2.7'
+        daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+        dagger = "com.google.dagger:dagger:$daggerVersion"
+
+        // Executor Generator
+        executorDecoratorVersion = '1.0'
+        executorDecoratorAnnotation = "com.nicolasmouchel:executordecorator-annotations:$executorDecoratorVersion"
+        executorDecoratorCompiler = "com.nicolasmouchel:executordecorator-compiler:$executorDecoratorVersion"
+
+        // Butterknife
+        butterkniferVersion = '8.4.0'
+        butterknife = "com.jakewharton:butterknife:$butterkniferVersion"
+        butterknifeCompiler = "com.jakewharton:butterknife-compiler:$butterkniferVersion"
+
+        // Jackson
+        jacksonVersion = '2.8.3'
+        jacksonCore = "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+        jacksonDatabind = "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+        jacksonAnnotations = "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+        jacksonDataTypeJoda = "com.fasterxml.jackson.datatype:jackson-datatype-joda:$jacksonVersion"
+
+        // Test
+        junit = "junit:junit:4.12"
+        junitDataProvider = "com.tngtech.java:junit-dataprovider:1.10.0"
+        mockito = "org.mockito:mockito-core:2.1.0-RC.1"
+        hierarchicalcontextrunner = "de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1"
+        assertj = "org.assertj:assertj-core:1.7.1"
+        mockwebserver = "com.squareup.okhttp3:mockwebserver:3.3.1"
     }
 }
 
