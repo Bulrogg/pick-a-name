@@ -1,25 +1,26 @@
 apply plugin: 'java'
-apply plugin: "net.ltgt.apt"
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':core')
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
-    apt "com.google.auto.value:auto-value:1.2"
-    compile "com.google.auto.value:auto-value:1.2"
+    // Auto value
+    compileOnly parent.ext.autoValue
+    compile parent.ext.autoValueAnnotation
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.8.3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.3'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.3'
+    // Jackson
+    compile parent.ext.jacksonCore
+    compile parent.ext.jacksonDatabind
+    compile parent.ext.jacksonAnnotations
+    compile parent.ext.jacksonDataTypeJoda
 
     // Test
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.1.0-RC.1'
-    testCompile 'de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1'
-    testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile 'org.robolectric:robolectric:3.1.2'
-    testCompile 'org.robolectric:shadows-support-v4:3.1.2'
+    testCompile parent.ext.junit
+    testCompile parent.ext.junitDataProvider
+    testCompile parent.ext.mockito
+    testCompile parent.ext.hierarchicalcontextrunner
+    testCompile parent.ext.assertj
+    testCompile parent.ext.mockwebserver
 }
