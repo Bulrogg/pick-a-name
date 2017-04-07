@@ -7,8 +7,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
 }
 
@@ -27,12 +25,12 @@ allprojects {
         // Android
         supportVersion = '24.2.1'
         supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
-        supportDesign =  "com.android.support:design:$supportVersion"
+        supportDesign = "com.android.support:design:$supportVersion"
 
         // Auto value
-        autoValueVersion = '1.2'
-        autoValueApt = "com.google.auto.value:auto-value:$autoValueVersion"
+        autoValueVersion = '1.4'
         autoValue = "com.google.auto.value:auto-value:$autoValueVersion"
+        autoValueAnnotation = "com.jakewharton.auto.value:auto-value-annotations:$autoValueVersion"
 
         // Dagger
         daggerVersion = '2.7'
@@ -40,7 +38,7 @@ allprojects {
         dagger = "com.google.dagger:dagger:$daggerVersion"
 
         // Executor Generator
-        executorDecoratorVersion = '1.0'
+        executorDecoratorVersion = '1.1'
         executorDecoratorAnnotation = "com.nicolasmouchel:executordecorator-annotations:$executorDecoratorVersion"
         executorDecoratorCompiler = "com.nicolasmouchel:executordecorator-compiler:$executorDecoratorVersion"
 

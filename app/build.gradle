@@ -49,13 +49,13 @@ dependencies {
     compile parent.ext.supportAppCompat
     compile parent.ext.supportDesign
 
-    // Dagger
-    compile parent.ext.dagger
-    annotationProcessor parent.ext.daggerCompiler
-
     // Executor Generator
     compile parent.ext.executorDecoratorAnnotation
     annotationProcessor parent.ext.executorDecoratorCompiler
+
+    // Dagger
+    compile parent.ext.dagger
+    annotationProcessor parent.ext.daggerCompiler
 
     // Butterknife
     compile parent.ext.butterknife

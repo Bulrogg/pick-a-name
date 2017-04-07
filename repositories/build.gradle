@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: "net.ltgt.apt"
 
 dependencies {
     compile project(path: ':core')
@@ -8,8 +7,8 @@ dependencies {
     targetCompatibility = 1.7
 
     // Auto value
-    apt parent.ext.autoValueApt
-    compile parent.ext.autoValue
+    compileOnly parent.ext.autoValue
+    compile parent.ext.autoValueAnnotation
 
     // Jackson
     compile parent.ext.jacksonCore
