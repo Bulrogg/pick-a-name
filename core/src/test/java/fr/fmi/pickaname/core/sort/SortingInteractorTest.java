@@ -16,9 +16,12 @@ import java.util.List;
 import fr.fmi.pickaname.core.configuration.ConfigurationRepository;
 import fr.fmi.pickaname.core.entities.FirstName;
 import fr.fmi.pickaname.core.entities.Settings;
+import fr.fmi.pickaname.core.entities.Sorting;
 import fr.fmi.pickaname.core.exception.TechnicalException;
 import fr.fmi.pickaname.core.firstname.GetFirstNamesRepository;
 
+import static fr.fmi.pickaname.core.entities.FirstName.Gender;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
@@ -34,6 +37,8 @@ public class SortingInteractorTest {
     @Mock SortingPresenter presenter;
     @Mock GetFirstNamesRepository getFirstNamesRepository;
     @Mock ConfigurationRepository configurationRepository;
+    @Mock Sorting sorting;
+
     @InjectMocks SortingInteractor intercator;
 
     @Captor ArgumentCaptor<String> lastNameCaptor;
@@ -44,6 +49,7 @@ public class SortingInteractorTest {
         MockitoAnnotations.initMocks(this);
         intercator = spy(intercator);
         given(configurationRepository.getSettings()).willReturn(settings);
+        given(configurationRepository.getSorting()).willReturn(sorting);
     }
 
     @Test
@@ -186,6 +192,50 @@ public class SortingInteractorTest {
 
         assertThat(firstNameCaptor.getValue()).isEqualTo(firstName);
         assertThat(intercator.getFirstNamesToPropose()).isEmpty();
+    }
+
+    @Test
+    public void getFirstNamesToPropose_ShouldNotProposeAlreadyAcceptedFirstName() throws Exception {
+        // Given
+        doReturn(asList(generateFirstName("f1", Gender.MALE), generateFirstName("f2", Gender.MALE)))
+                .when(getFirstNamesRepository).getFirstNames();
+        given(sorting.getAccepted()).willReturn(asList("f1"));
+
+        // When
+        final List<FirstName> firstNamesToPropose = intercator.getFirstNamesToPropose();
+
+        // Then
+        assertThat(firstNamesToPropose).hasSize(1);
+        assertThat(firstNamesToPropose.get(0).getFirstName()).isEqualTo("f2");
+    }
+
+    @Test
+    public void getFirstNamesToPropose_ShouldNotProposeAlreadyRejectedFirstName() throws Exception {
+        // Given
+        doReturn(asList(generateFirstName("f1", Gender.MALE), generateFirstName("f2", Gender.MALE)))
+                .when(getFirstNamesRepository).getFirstNames();
+        given(sorting.getRejected()).willReturn(asList("f1"));
+
+        // When
+        final List<FirstName> firstNamesToPropose = intercator.getFirstNamesToPropose();
+
+        // Then
+        assertThat(firstNamesToPropose).hasSize(1);
+        assertThat(firstNamesToPropose.get(0).getFirstName()).isEqualTo("f2");
+    }
+
+    private FirstName generateFirstName(final String firstName, final Gender gender) {
+        return new FirstName() {
+            @Override
+            public String getFirstName() {
+                return firstName;
+            }
+
+            @Override
+            public Gender getGender() {
+                return gender;
+            }
+        };
     }
 
 }
