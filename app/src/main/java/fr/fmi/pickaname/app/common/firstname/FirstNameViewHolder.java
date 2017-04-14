@@ -8,7 +8,7 @@ import butterknife.ButterKnife;
 import fr.fmi.pickaname.R;
 import fr.fmi.pickaname.app.common.BinderViewHolder;
 
-public class FirstNameViewHolder extends BinderViewHolder<FirstNameViewModel> {
+class FirstNameViewHolder extends BinderViewHolder<FirstNameViewModel> {
 
     @BindView(R.id.first_name_view) TextView firstNameView;
     @BindView(R.id.last_name_view) TextView lastNameView;
@@ -17,15 +17,10 @@ public class FirstNameViewHolder extends BinderViewHolder<FirstNameViewModel> {
         super(itemView);
     }
 
-    public static FirstNameViewHolder newInstance(final View itemView) {
+    static FirstNameViewHolder newInstance(final View itemView) {
         final FirstNameViewHolder viewHolder = new FirstNameViewHolder(itemView);
         ButterKnife.bind(viewHolder, itemView);
         return viewHolder;
-    }
-
-    @Override
-    protected Class<FirstNameViewModel> getClassType() {
-        return FirstNameViewModel.class;
     }
 
     @Override

@@ -9,15 +9,5 @@ public abstract class BinderViewHolder<T> extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    // TODO remove
-    @SuppressWarnings("unchecked")
-    public final void bindObject(final Object object) {
-        if (getClassType().isInstance(object)) {
-            bind((T) object);
-        }
-    }
-
-    protected abstract Class<T> getClassType();
-
     protected abstract void bind(final T object);
 }
